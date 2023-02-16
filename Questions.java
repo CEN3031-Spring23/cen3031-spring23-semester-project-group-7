@@ -1,12 +1,17 @@
 
 public class Questions {
+   private String[] quesionBank
+   private int[] pointValues
 
-}
+   public Questions(){
 
-public void getQuestions(int quesionID) {
-	
-}
+   }
 
-public void getPoints(int quesionID) {
-	
+   public int getPoint(int index){
+
+   }
+
+   public String getQuestion(int index){
+
+   }
 }
