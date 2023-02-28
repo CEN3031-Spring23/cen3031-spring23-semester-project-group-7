@@ -49,7 +49,6 @@ class DeckTests {
 
 		if((value1 == value3) && (suit1 == suit3) && (value2 == value4) && (value2 == value4)) {
 			fail();
-		} else {
 			return;
 		}
 	}
@@ -57,5 +56,22 @@ class DeckTests {
 
 
 class CardTests {
+	
+	Card cards = new Card(3, 10, 12); //Order is Suit, Value, Rank
+
+    @Test
+    public void suitTest() {
+        assertEquals(3, cards.getSuit());
+    }
+
+    @Test
+    public void valueTest() {
+        assertEquals(10, cards.getValue());
+    }
+
+    @Test
+    public void rankTest() {
+        assertEquals(12, cards.getRank());
+    }
 
 }
