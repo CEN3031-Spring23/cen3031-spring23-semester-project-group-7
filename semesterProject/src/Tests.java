@@ -47,8 +47,8 @@ class DeckTests {
 
 		if((rank1 == rank3) && (suit1 == suit3) && (rank2 == rank4) && (rank2 == rank4)) {
 			fail();
-			return;
 		}
+		return;
 	}
 }
 
@@ -72,4 +72,41 @@ class CardTests {
         assertEquals(12, cards.getRank());
     }
 
+}
+
+class GameTests {
+	Game g1;
+	Player p1;
+
+	void testGetBet() {
+		g1.Game(false, 20, 0, 100);
+		int bet = g1.getBet();
+		assertEquals(20, bet);
+	}
+
+	void testDoubleDown() {
+		g1.Game(false, 20, 0, 100);
+		int doubledBet = g1.douleDown();
+		assertEquals(40, bet);
+	}
+
+	void testCheckBet() {
+		g1.Game(false, -10, 0, 100);
+		assertEquals(false, g1.checkBet());
+	}
+
+	void testCheckBust() {
+		Card[] testHand = {Card(1, 8, 10), Card(2, 8, 10), Card(3, 8, 10)};
+		p1.hand = testHand;
+		int value = p1.calculate();
+		assertEquals(true, g1.getBust());
+	}
+
+	void testPlayAgain() {
+		boolean goAgain = false;
+		goAgain = g1.playAgain('y');
+		assertEquals(true, goAgain);
+	}
+
+	
 }
