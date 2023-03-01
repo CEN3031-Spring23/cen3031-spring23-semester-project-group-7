@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Deck {
     private static final int COUNT = 52;
+    private int topCard = 0;
     Card cards[];
 
     public Deck() {
@@ -18,13 +19,16 @@ public class Deck {
                 }
             }
         }
+        shuffle();
     }
 
     public void shuffle() {
          Collections.shuffle(cards);
+         topCard = 0;
     }
 
     public Card getCard() {
-        return cards[0];
+        topCard++;
+        return cards[topCard-1];
     }
 }
