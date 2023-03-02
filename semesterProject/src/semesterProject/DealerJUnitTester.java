@@ -60,7 +60,5 @@ class DealerJUnitTester {
 		dealer.clearHand();
 		
 		assertEquals("", dealer.getHand());
-		
 	}
-
 }
