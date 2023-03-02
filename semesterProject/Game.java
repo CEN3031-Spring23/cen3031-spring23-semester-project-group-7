@@ -1,28 +1,55 @@
 public class Game {
+	private int bet;
+	private int payout;
+	private int tokens;
+	private Dealer dealer;
+	private Player player;
+	
+	public Game() {
+		bet = 0;
+		payout = 0;
+		tokens = 0;
+		dealer = new Dealer();
+		player = new Player();
+	}
 	
 	public boolean checkBlackjack() {
-		if(player.calculate == 21) 
+		if(player.calculateHand() == 21) 
 			return true;
 		else
 			return false;
 		
 	}
 	
-	public boolean checkBust() {
-		if (player.calcluate() > 21)
-			retrun true;
+	public boolean hasPlayerBusted() {
+		if (player.calcluateHand() > 21)
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean hasDealerBusted() {
+		if (dealer.calcluateHand() > 21)
+			return true;
 		else 
 			return false;
 	}
 	
 	public int checkWinner() {
-		if (player.calculate() > 21)
-			return -1;
-		if (player.calculate() > dealer.calculate())
+		if (!hasPlayerBusted()) {
 			return 1;
-		else if (player.calculate() > dealer.calculate()) 
+		}
+		else if(!hasDealerBusted()) {
 			return -1;
-		else if(player.calculate() == dealer.calculate())
+		}
+		
+		else if (player.calculate() > dealer.calculate())
+			return 1;
+		
+		else if (dealer.calculate() > player.calculate()) 
+			return -1;
+		
+		else 
 			return 0;
 	}
  
@@ -31,6 +58,6 @@ public class Game {
 		 return false;
 	 else 
 		 return true;
- }
+	}
     
 }
