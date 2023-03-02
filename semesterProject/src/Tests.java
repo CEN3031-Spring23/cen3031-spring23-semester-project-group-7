@@ -171,3 +171,43 @@ class DealerJUnitTester {
 	}
 
 }
+
+class PlayerJUnitTest {
+	
+	@Test
+	void chooseAceTest() {
+		Player player = new player();
+		Card card1 = new Card(1, 2, 12);
+		Card card2 = new Card(1, 8, 12);
+		
+		player.addCard(card1);
+		player.addCard(card2);
+		
+		assertEquals(1, player.chooseAce());
+	}
+	
+	@Test
+	void calculateTest() {
+		Player player = new Player();
+		Card card1 = new Card(1, 2, 12);
+		Card card2 = new Card(1, 8, 12);
+		
+		player.addCard(card1);
+		player.addCArd(card2);
+		
+		assertEquals(10, player.calculate());
+	}
+	
+	@Test
+	void clearTest() {
+		Player player = new Player();
+		Card card = new Card()1, 2, 12;
+		
+		player.addCard(card);
+		player.clear();
+		
+		assertEquals(0, value);
+		assertEquals(0, numCards);
+	}
+
+}
