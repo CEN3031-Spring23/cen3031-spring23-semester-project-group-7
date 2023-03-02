@@ -3,7 +3,7 @@ import java.util.*;
 public class Deck {
     private static final int COUNT = 52;
     private int topCard = 0;
-    Card cards[];
+    private Card cards[];
 
     public Deck() {
         cards = new Card[COUNT];
