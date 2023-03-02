@@ -27,13 +27,6 @@ public class Player {
 		value = 0;
 	}
 	
-	public int chooseAce() {
-		if (aceValue + value + 10 <= 21) {
-			aceValue = 11;	
-		}
-		return aceValue;
-	}
-	
 	public void addCard(Card card) {
 		hand[numCards] = card;
 		numCards++;
