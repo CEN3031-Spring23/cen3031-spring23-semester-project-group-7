@@ -12,9 +12,10 @@ public class Player {
 		aceValue = 1;
 	}
 	
-	public int calculate() {
+	public void recalculate() {
+		value = 0;
 		for (int i = 0; i < numCards; i++) {
-			value += hand[i].getValue();
+			value += hand[i].getValue();	
 		}
 	}
 	
@@ -36,6 +37,18 @@ public class Player {
 	public void addCard(Card card) {
 		hand[numCards] = card;
 		numCards++;
+		value += hand[i].getValue();
+	}
+	
+	public void aceBuster() {
+		for (int i = 0; i < MAX_VALUE; i++) {
+			if (hand[i].getRank() == 1) {
+				if (value > 21) {
+					hand[i].setValue(1);	
+					recalculate();
+				}
+			}
+		}
 	}
 
 }
