@@ -6,7 +6,7 @@ public class Deck {
     Card cards[];
 
     public Deck() {
-        Card cards = new Card[COUNT];
+        cards = new Card[COUNT];
         int counter = 0;
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 14; j++) {
