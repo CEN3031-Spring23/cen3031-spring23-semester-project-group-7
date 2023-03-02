@@ -9,13 +9,13 @@ public class Deck {
         cards = new Card[COUNT];
         int counter = 0;
         for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 14; j++) {
-                if(j > 12) {
-                    cards[counter] = Card(i, j, 11);
-                } else if(j > 7) {
-                    cards[counter] = Card(i, j, 10);
+            for(int j = 1; j < 14; j++) {
+                if(j == 1) {
+                    cards[counter] = new Card(i, 11, j);
+                } else if(j < 11) {
+                    cards[counter] = new Card(i, j, j);
                 } else {
-                    cards[counter] = Card(i, j, j+2);
+                    cards[counter] = new Card(i, j, 10);
                 }
             }
         }
