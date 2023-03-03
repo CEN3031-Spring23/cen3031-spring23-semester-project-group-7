@@ -1,19 +1,23 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Deck {
-    private static final int COUNT = 52;
     private int topCard = 0;
-    private Card cards[];
+    public ArrayList<Card> cards;
 
     public Deck() {
-        cards = new Card[COUNT];
-        int counter = 0;
+        cards = new ArrayList<Card>();
         for(int i = 0; i < 4; i++) {
             for(int j = 1; j < 14; j++) {
                 if(j == 1) {
-                    cards[counter] = new Card(i, 11, j);
+                    Card card = new Card(i, 11, j);
+                	cards.add(card);
                 } else if(j < 11) {
-                    cards[counter] = new Card(i, j, j);
+                    Card card = new Card(i, j, j);
+                    cards.add(card);
                 } else {
-                    cards[counter] = new Card(i, j, 10);
+                    Card card = new Card(i, j, 10);
+                    cards.add(card);
                 }
             }
         }
@@ -27,6 +31,6 @@ public class Deck {
 
     public Card getCard() {
         topCard++;
-        return cards[topCard-1];
+        return cards.get(topCard -1);
     }
 }

@@ -4,6 +4,7 @@ public class Dealer {
 	private int value;
 	private Card[] hand;
 	private int numOfCards;
+	private int aceValue;
 
 	public Dealer() {
 		value = 0;
@@ -55,7 +56,7 @@ public class Dealer {
 
 	public void aceBuster(){
 		for(int i = 0; i < numOfCards; i++){
-			if(hand[i].getRank == 1){
+			if(hand[i].getRank() == 1){
 				if(value > 21){
 					hand[i].setValue(1);
 					recalculateHand();

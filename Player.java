@@ -12,6 +12,10 @@ public class Player {
 		aceValue = 1;
 	}
 
+	public int getValue() {
+		return value;
+	}
+
 	public void recalculate() {
 		value = 0;
 		for (int i = 0; i < numCards; i++) {
@@ -30,7 +34,7 @@ public class Player {
 	public void addCard(Card card) {
 		hand[numCards] = card;
 		numCards++;
-		value += hand[i].getValue();
+		value += hand[numCards].getValue();
 	}
 
 	public void aceBuster() {
