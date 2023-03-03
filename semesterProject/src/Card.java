@@ -1,30 +1,30 @@
 
-public class Card {  
+public class Card {
     private int suit;
     private int value;
     private int rank;
-    
-    public Card() { 
+
+    public Card() {
         suit = 0;
-        value = 0; 
-        rank = 0; 
+        value = 0;
+        rank = 0;
     }
-    
-    public Card(int sVal, int vVal, int rVal) { 
+
+    public Card(int sVal, int vVal, int rVal) {
         suit = sVal;
         value = vVal;
         rank = rVal;
     }
-    
-    public int getSuit() { 
-      return suit; 
+
+    public int getSuit() {
+      return suit;
     }
 
-    public int getValue() { 
-      return value; 
+    public int getValue() {
+      return value;
     }
 
-    public int getRank() { 
+    public int getRank() {
         return rank;
       }
     }

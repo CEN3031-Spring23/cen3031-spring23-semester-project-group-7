@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Deck {
     private static final int COUNT = 52;
     private int topCard = 0;
