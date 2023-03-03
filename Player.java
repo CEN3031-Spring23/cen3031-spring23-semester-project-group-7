@@ -3,13 +3,11 @@ public class Player {
 	private int value;
 	private Card hand[];
 	private int numCards;
-	private int aceValue;
 	private static final int MAX_VALUE = 11;
 
 	public Player() {
 		value = 0;
 		hand = new Card[MAX_VALUE];
-		aceValue = 1;
 	}
 
 	public int getValue() {
