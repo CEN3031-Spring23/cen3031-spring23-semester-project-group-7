@@ -14,7 +14,7 @@ class DeckTests {
 	@Test
 	void testDeckCreation() {
 		int value;
-		value = d1.cards.get(51).getValue();
+		value = d1.cards[51].getValue();
 		assertEquals(14, value);
 	}
 
@@ -33,17 +33,17 @@ class DeckTests {
 		int rank1, rank2, rank3, rank4;
 		int suit1, suit2, suit3, suit4;
 
-		rank1 = d1.cards.get(20).getRank();
-		suit1 = d1.cards.get(20).getSuit();
-		rank2 = d1.cards.get(40).getRank();
-		suit2 = d1.cards.get(40).getSuit();
+		rank1 = d1.cards[20].getRank();
+		suit1 = d1.cards[20].getSuit();
+		rank2 = d1.cards[40].getRank();
+		suit2 = d1.cards[40].getSuit();
 
 		d1.shuffle();
 
-		rank3 = d1.cards.get(20).getRank();
-		suit3 = d1.cards.get(20).getSuit();
-		rank4 = d1.cards.get(40).getRank();
-		suit4 = d1.cards.get(40).getSuit();
+		rank3 = d1.cards[20].getRank();
+		suit3 = d1.cards[20].getSuit();
+		rank4 = d1.cards[40].getRank();
+		suit4 = d1.cards[40].getSuit();
 
 		if((rank1 == rank3) && (suit1 == suit3) && (rank2 == rank4) && (rank2 == rank4)) {
 			fail();
@@ -52,10 +52,9 @@ class DeckTests {
 	}
 }
 
-
 class CardTests {
 
-	Card cards = new Card(3, 10, 12); //Order is Suit, Value, Rank
+	Card cards = new Card(3, 10, 12);
 
     @Test
     public void suitTest() {
@@ -111,40 +110,19 @@ class GameTests {
 
 }
 
+
 class DealerJUnitTester {
 
 	@Test
 	void createDealerTest() {
 		Dealer dealer = new Dealer();
 
-		assertEquals(0, dealer.calculateHand());
-		assertEquals("", dealer.getHand());
+		assertEquals(0, dealer.getValue());
+		assertEquals("Dealer Hand: ", dealer.getHand());
 	}
-
+	
 	@Test
-	void aceValueTest() {
-		Dealer dealer = new Dealer();
-
-		assertEquals(11, dealer.getAceValue());
-
-		dealer.setAce(1);
-		assertEquals(1, dealer.getAceValue());
-	}
-
-	@Test
-	void dealerHandTest() {
-		Dealer dealer = new Dealer();
-		Card card1 = new Card(1, 2, 2);
-		Card card2 = new Card(3, 10, 12);
-
-		dealer.addCard(card1);
-		assertEquals("Card 1: 1, 2, 2\n", dealer.getHand());
-		dealer.addCard(card2);
-		assertEquals("Card 1: 1, 2, 2\nCard 2: 3, 10, 12\n", dealer.getHand());
-	}
-
-	@Test
-	void calculateDealerHandTest() {
+	void addCardDealerTest() {
 		Dealer dealer = new Dealer();
 		Card card1 = new Card(1, 2, 2);
 		Card card2 = new Card(3, 10, 12);
@@ -152,7 +130,19 @@ class DealerJUnitTester {
 		dealer.addCard(card1);
 		dealer.addCard(card2);
 
-		assertEquals(12, dealer.calculateHand());
+		assertEquals(12, dealer.getValue());
+	}
+	
+	@Test
+	void getDealerHandTest() {
+		Dealer dealer = new Dealer();
+		Card card1 = new Card(1, 2, 2);
+		Card card2 = new Card(3, 10, 12);
+
+		dealer.addCard(card1);
+		assertEquals("Dealer Hand: 2 of Spades", dealer.getHand());
+		dealer.addCard(card2);
+		assertEquals("Dealer Hand: 2 of Spades, Queen of Hearts", dealer.getHand());
 	}
 
 	@Test
@@ -166,8 +156,21 @@ class DealerJUnitTester {
 		dealer.addCard(card2);
 		dealer.clearHand();
 
-		assertEquals("", dealer.getHand());
+		assertEquals("Dealer Hand: ", dealer.getHand());
 
+	}
+	
+	@Test
+	void aceBusterDealerTest() {
+		Dealer dealer = new Dealer();
+		Card card1 = new Card(1, 11, 1);
+		Card card2 = new Card(2, 11, 1);
+		
+		dealer.addCard(card1);
+		dealer.addCard(card2);
+		dealer.aceBuster();
+		
+		assertEquals(12, dealer.getValue());
 	}
 
 }
@@ -175,39 +178,62 @@ class DealerJUnitTester {
 class PlayerJUnitTest {
 
 	@Test
-	void chooseAceTest() {
-		Player player = new player();
-		Card card1 = new Card(1, 2, 12);
-		Card card2 = new Card(1, 8, 12);
+	void createPlayerTest() {
+		Player player = new Player();
+
+		assertEquals(0, player.getValue());
+	}
+
+	@Test
+	void addCardPlayerTest() {
+		Player player = new Player();
+		Card card1 = new Card(1, 2, 2);
+		Card card2 = new Card(3, 10, 12);
 
 		player.addCard(card1);
 		player.addCard(card2);
 
-		assertEquals(1, player.chooseAce());
+		assertEquals(12, player.getValue());
 	}
-
+	
 	@Test
-	void calculateTest() {
+	void getPlayerHandTest() {
 		Player player = new Player();
-		Card card1 = new Card(1, 2, 12);
-		Card card2 = new Card(1, 8, 12);
+		Card card1 = new Card(1, 2, 2);
+		Card card2 = new Card(3, 10, 12);
 
 		player.addCard(card1);
-		player.addCArd(card2);
-
-		assertEquals(10, player.calculate());
+		assertEquals("Player Hand: 2 of Spades", player.getHand());
+		player.addCard(card2);
+		assertEquals("Player Hand: 2 of Spades, Queen of Hearts", player.getHand());
 	}
 
 	@Test
-	void clearTest() {
+	void clearPlayerHandTest() {
 		Player player = new Player();
-		Card card = new Card()1, 2, 12;
+		Card card1 = new Card(1, 2, 2);
+		Card card2 = new Card(3, 10, 12);
 
-		player.addCard(card);
-		player.clear();
 
-		assertEquals(0, value);
-		assertEquals(0, numCards);
+		player.addCard(card1);
+		player.addCard(card2);
+		player.clearHand();
+
+		assertEquals("Player Hand: ", player.getHand());
+
+	}
+	
+	@Test
+	void aceBusterPlayerTest() {
+		Player player = new Player();
+		Card card1 = new Card(1, 11, 1);
+		Card card2 = new Card(2, 11, 1);
+		
+		player.addCard(card1);
+		player.addCard(card2);
+		player.aceBuster();
+		
+		assertEquals(12, player.getValue());
 	}
 
 }
