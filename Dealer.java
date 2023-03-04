@@ -30,17 +30,6 @@ public class Dealer {
 		return value;
 	}
 
-	public String getHand() {
-		String outputHand = "";
-		for(int i = 0; i < numOfCards; i++) {
-			outputHand += "Card " + (i + 1) + ": "
-					   + hand[i].getSuit() + ", "
-					   + hand[i].getValue() + ", "
-					   + hand[i].getRank() + "\n";
-		}
-		return outputHand;
-	}
-
 	public void recalculateHand(){
 		value = 0;
 		for(int i = 0; i < numOfCards; i++){
@@ -57,6 +46,121 @@ public class Dealer {
 				}
 			}
 		}
-
+	}
+	
+	public String getHand() {
+		String outputHand = "Dealer Hand: ";
+		for(int i = 0; i < numOfCards; i++) {
+			if(i == numOfCards - 1) {
+				if(hand[i].getSuit() == 0) {
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Clubs";
+					} else if(hand[i].getRank() == 11) {
+						outputHand += "Jack of Clubs";
+					} else if(hand[i].getRank() == 12) {
+						outputHand +=  "Queen of Clubs";
+					} else if(hand[i].getRank() == 13) {
+						outputHand +=  "King of Clubs";
+					} else {
+						outputHand += hand[i].getRank() + " of Clubs";
+					}
+				} else if(hand[i].getSuit() == 1){
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Spades";
+					} else if(hand[i].getRank() == 11) {
+						outputHand += "Jack of Spades";
+					} else if(hand[i].getRank() == 12) {
+						outputHand +=  "Queen of Spades";
+					} else if(hand[i].getRank() == 13) {
+						outputHand +=  "King of Spades";
+					} else {
+						outputHand += hand[i].getRank() + " of Spades";
+					}
+				} else if(hand[i].getSuit() == 2){
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Diamonds";
+					} else if(hand[i].getRank() == 11) {
+						outputHand += "Jack of Diamonds";
+					} else if(hand[i].getRank() == 12) {
+						outputHand +=  "Queen of Diamonds";
+					} else if(hand[i].getRank() == 13) {
+						outputHand +=  "King of Diamonds";
+					} else {
+						outputHand += hand[i].getRank() + " of Diamonds";
+					}
+				} else if(hand[i].getSuit() == 3){
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Hearts";
+					} else if(hand[i].getRank() == 11) {
+						outputHand += "Jack of Hearts";
+					} else if(hand[i].getRank() == 12) {
+						outputHand +=  "Queen of Hearts";
+					} else if(hand[i].getRank() == 13) {
+						outputHand +=  "King of Hearts";
+					} else {
+						outputHand += hand[i].getRank() + " of Hearts";
+					}
+			    }
+			} else {
+				if(hand[i].getSuit() == 0) {
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Clubs, ";
+					} else if(hand[i].getRank() == 11) {
+					outputHand += "Jack of Clubs, ";
+					} else if(hand[i].getRank() == 12) {
+					outputHand +=  "Queen of Clubs, ";
+					} else if(hand[i].getRank() == 13) {
+					outputHand +=  "King of Clubs, ";
+					} else {
+					outputHand += hand[i].getRank() + " of Clubs, ";
+					}
+				} else if(hand[i].getSuit() == 1){
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Spades, ";
+					} else if(hand[i].getRank() == 11) {
+						outputHand += "Jack of Spades, ";
+					} else if(hand[i].getRank() == 12) {
+						outputHand +=  "Queen of Spades, ";
+					} else if(hand[i].getRank() == 13) {
+						outputHand +=  "King of Spades, ";
+					} else {
+						outputHand += hand[i].getRank() + " of Spades, ";
+					}
+				} else if(hand[i].getSuit() == 2){
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Diamonds, ";
+					} else if(hand[i].getRank() == 11) {
+						outputHand += "Jack of Diamonds, ";
+					} else if(hand[i].getRank() == 12) {
+						outputHand +=  "Queen of Diamonds, ";
+					} else if(hand[i].getRank() == 13) {
+						outputHand +=  "King of Diamonds, ";
+					} else {
+						outputHand += hand[i].getRank() + " of Diamonds, ";
+					}
+				} else if(hand[i].getSuit() == 3){
+					if(hand[i].getRank() == 1) {
+						outputHand += "Ace of Hearts, ";
+					} else if(hand[i].getRank() == 11) {
+						outputHand += "Jack of Hearts, ";
+					} else if(hand[i].getRank() == 12) {
+						outputHand +=  "Queen of Hearts, ";
+					} else if(hand[i].getRank() == 13) {
+						outputHand +=  "King of Hearts, ";
+					} else {
+						outputHand += hand[i].getRank() + " of Hearts, ";
+					}
+				}
+			}
+		}
+		return outputHand;
+	}
+	
+	public int getNumOfCards() {
+		return numCards;
+	}
+	
+	public Card getCard(int card) {
+		return hand[card];
 	}
 }
