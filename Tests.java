@@ -6,13 +6,10 @@ import org.junit.jupiter.api.BeforeAll;
 class DeckTests {
 
 	Deck d1;
-	@BeforeAll
-	void createDeck() {
-		d1 = new Deck();
-	}
 
 	@Test
 	void testDeckCreation() {
+		d1 = new Deck();
 		int value;
 		d1.setTopCard(51);
 		value = d1.getCard().getRank();
@@ -21,16 +18,18 @@ class DeckTests {
 
 	@Test
 	void testGetCard() {
+		d1 = new Deck();
 		int value;
 		int suit;
 		value = d1.getCard().getValue();
-		suit = d1.getCard().getValue();
+		suit = d1.getCard().getSuit();
 		assertEquals(11, value);
 		assertEquals(0, suit);
 	}
 
 	@Test
 	void testShuffle() {
+		d1 = new Deck();
 		int rank1, rank2, rank3, rank4;
 		int suit1, suit2, suit3, suit4;
 
@@ -58,7 +57,6 @@ class DeckTests {
 		if((rank1 == rank3) && (suit1 == suit3) && (rank2 == rank4) && (rank2 == rank4)) {
 			fail();
 		}
-		return;
 	}
 }
 
@@ -89,43 +87,43 @@ class CardTests {
 
 }
 
+/*
 class GameTests {
 	Game g1;
 	Player p1;
+	Dealer d1;
 
-	void testGetBet() {
-		g1.Game(false, 20, 0, 100);
-		int bet = g1.getBet();
-		assertEquals(20, bet);
+	@Test
+	void hasPlayerBustedTest() {
+		p1 = new Player();
+		Card card1 = new Card(0,10,12);
+		Card card2 = new Card(1,10,12);
+		Card card3 = new Card(2,10,12);
+		p1.addCard(card1);
+		p1.addCard(card2);
+		p1.addCard(card3);
+
+		boolean playerBust = g1.hasPlayerBusted();
+
+		assertEquals(true, playerBust);
 	}
+	
+	@Test
+	void hasDealerBustedTest() {
+		d1 = new Dealer();
+		Card card1 = new Card(0,10,12);
+		Card card2 = new Card(1,10,12);
+		Card card3 = new Card(2,10,12);
+		d1.addCard(card1);
+		d1.addCard(card2);
+		d1.addCard(card3);
 
-	void testDoubleDown() {
-		g1.Game(false, 20, 0, 100);
-		int doubledBet = g1.douleDown();
-		assertEquals(40, bet);
+		boolean playerBust = g1.hasPlayerBusted();
+
+		assertEquals(true, playerBust);
 	}
-
-	void testCheckBet() {
-		g1.Game(false, -10, 0, 100);
-		assertEquals(false, g1.checkBet());
-	}
-
-	void testCheckBust() {
-		Card[] testHand = {Card(1, 8, 10), Card(2, 8, 10), Card(3, 8, 10)};
-		p1.hand = testHand;
-		int value = p1.calculate();
-		assertEquals(true, g1.getBust());
-	}
-
-	void testPlayAgain() {
-		boolean goAgain = false;
-		goAgain = g1.playAgain('y');
-		assertEquals(true, goAgain);
-	}
-
-
 }
-
+*/
 
 class DealerJUnitTester {
 

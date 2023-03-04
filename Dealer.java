@@ -157,7 +157,7 @@ public class Dealer {
 	}
 	
 	public int getNumOfCards() {
-		return numCards;
+		return numOfCards;
 	}
 	
 	public Card getCard(int card) {
