@@ -40,9 +40,9 @@ class DeckTests {
 		suit1 = d1.getCard().getSuit();
 
 		d1.setTopCard(40);
-		rank2 = d1.cards.get(40).getRank();
+		rank2 = d1.getCard().getRank();
 		d1.setTopCard(40);
-		suit2 = d1.cards.get(40).getSuit();
+		suit2 = d1.getCard().getSuit();
 
 		d1.shuffle();
 
