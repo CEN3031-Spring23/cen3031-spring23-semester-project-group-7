@@ -16,7 +16,7 @@ public class Deck {
                     Card card = new Card(i, j, j);
                     cards.add(card);
                 } else {
-                    Card card = new Card(i, j, 10);
+                    Card card = new Card(i, 10, j);
                     cards.add(card);
                 }
             }
