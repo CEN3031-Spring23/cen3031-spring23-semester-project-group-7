@@ -20,6 +20,10 @@ public class Card {
       return suit;
     }
 
+    public void setValue(int newValue) {
+    	value = newValue;
+    }
+    
     public int getValue() {
       return value;
     }

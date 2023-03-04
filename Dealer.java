@@ -9,7 +9,6 @@ public class Dealer {
 		value = 0;
 		hand = new Card[MAX_NUMBER_OF_CARDS];
 		numOfCards = 0;
-		aceValue = 11;
 	}
 
 	public void addCard(Card newCard) {
@@ -18,16 +17,12 @@ public class Dealer {
 		value += newCard.getValue();
 	}
 
-	public void setAce(int newAceValue) {
-		aceValue = newAceValue;
-	}
 
 	public void clearHand() {
 		for(int i = 0; i < numOfCards; i++) {
 			hand[i] = null;
 		}
 		numOfCards = 0;
-		aceValue = 11;
 		value = 0;
 	}
 
@@ -55,7 +50,7 @@ public class Dealer {
 
 	public void aceBuster(){
 		for(int i = 0; i < numOfCards; i++){
-			if(hand[i].getRank == 1){
+			if(hand[i].getRank() == 1){
 				if(value > 21){
 					hand[i].setValue(1);
 					recalculateHand();

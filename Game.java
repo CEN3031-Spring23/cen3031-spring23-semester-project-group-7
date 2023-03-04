@@ -4,6 +4,7 @@ public class Game {
 	private int tokens;
 	private Dealer dealer;
 	private Player player;
+	private char keepPlaying;
 
 	public Game() {
 		bet = 0;
@@ -14,50 +15,48 @@ public class Game {
 	}
 
 	public boolean checkBlackjack() {
-		if(player.calculateHand() == 21)
+		if(player.getValue() == 21) {
 			return true;
-		else
+		} else {
 			return false;
-
+		}
 	}
 
 	public boolean hasPlayerBusted() {
-		if (player.calcluateHand() > 21)
+		if (player.getValue() > 21) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
 	public boolean hasDealerBusted() {
-		if (dealer.calcluateHand() > 21)
+		if (dealer.getValue() > 21) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
 	public int checkWinner() {
 		if (!hasPlayerBusted()) {
 			return 1;
-		}
-		else if(!hasDealerBusted()) {
+		} else if(!hasDealerBusted()) {
 			return -1;
-		}
-
-		else if (player.calculate() > dealer.calculate())
+		} else if (player.getValue() > dealer.getValue()) {
 			return 1;
-
-		else if (dealer.calculate() > player.calculate())
+		} else if (dealer.getValue() > player.getValue()) {
 			return -1;
-
-		else
+		} else {
 			return 0;
+		}
 	}
 
-	public boolean playAgain(char continue) {
-	 if (continue == 'n'|| continue == 'N')
-		 return false;
-	 else
+	public boolean playAgain(char keepPlaying) {
+		if (keepPlaying == 'n'|| keepPlaying == 'N') {
+			return false;
+		} else {
 		 return true;
+		 }
 	}
-
 }
