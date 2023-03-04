@@ -159,11 +159,9 @@ public class Game {
 	}
 	
 	public void printHands() {
-		System.out.println("Dealer Hand: " + dealer.getValue());
-		System.out.println(dealer.getHand());
+		System.out.println(dealer.getHand() + " (" + dealer.getValue() + ")");
 		
-		System.out.println("Player Hand: " + player.getValue());
-		System.out.println(player.getHand());
+		System.out.println(player.getHand() + " (" + player.getValue() + ")");
 		System.out.println();
 	}
 }
