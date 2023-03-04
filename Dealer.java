@@ -4,7 +4,6 @@ public class Dealer {
 	private int value;
 	private Card[] hand;
 	private int numOfCards;
-	private int aceValue;
 
 	public Dealer() {
 		value = 0;
