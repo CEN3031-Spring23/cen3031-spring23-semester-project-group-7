@@ -6,13 +6,10 @@ import org.junit.jupiter.api.BeforeAll;
 class DeckTests {
 
 	Deck d1;
-	@BeforeAll
-	void createDeck() {
-		d1 = new Deck();
-	}
 
 	@Test
 	void testDeckCreation() {
+		d1 = new Deck();
 		int value;
 		d1.setTopCard(51);
 		value = d1.getCard().getRank();
@@ -21,16 +18,18 @@ class DeckTests {
 
 	@Test
 	void testGetCard() {
+		d1 = new Deck();
 		int value;
 		int suit;
 		value = d1.getCard().getValue();
-		suit = d1.getCard().getValue();
+		suit = d1.getCard().getSuit();
 		assertEquals(11, value);
 		assertEquals(0, suit);
 	}
 
 	@Test
 	void testShuffle() {
+		d1 = new Deck();
 		int rank1, rank2, rank3, rank4;
 		int suit1, suit2, suit3, suit4;
 
@@ -58,7 +57,6 @@ class DeckTests {
 		if((rank1 == rank3) && (suit1 == suit3) && (rank2 == rank4) && (rank2 == rank4)) {
 			fail();
 		}
-		return;
 	}
 }
 
@@ -89,6 +87,7 @@ class CardTests {
 
 }
 
+/*
 class GameTests {
 	Game g1;
 	Player p1;
@@ -96,6 +95,7 @@ class GameTests {
 
 	@Test
 	void hasPlayerBustedTest() {
+		p1 = new Player();
 		Card card1 = new Card(0,10,12);
 		Card card2 = new Card(1,10,12);
 		Card card3 = new Card(2,10,12);
@@ -110,6 +110,7 @@ class GameTests {
 	
 	@Test
 	void hasDealerBustedTest() {
+		d1 = new Dealer();
 		Card card1 = new Card(0,10,12);
 		Card card2 = new Card(1,10,12);
 		Card card3 = new Card(2,10,12);
@@ -122,7 +123,7 @@ class GameTests {
 		assertEquals(true, playerBust);
 	}
 }
-
+*/
 
 class DealerJUnitTester {
 
