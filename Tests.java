@@ -14,7 +14,8 @@ class DeckTests {
 	@Test
 	void testDeckCreation() {
 		int value;
-		value = d1.cards.get(51).getRank();
+		d1.setTopCard(51);
+		value = d1.getCard().getRank();
 		assertEquals(13, value);
 	}
 
@@ -24,8 +25,8 @@ class DeckTests {
 		int suit;
 		value = d1.getCard().getValue();
 		suit = d1.getCard().getValue();
-		assertEquals(2, value);
-		assertEquals(1, suit);
+		assertEquals(11, value);
+		assertEquals(0, suit);
 	}
 
 	@Test
@@ -33,17 +34,26 @@ class DeckTests {
 		int rank1, rank2, rank3, rank4;
 		int suit1, suit2, suit3, suit4;
 
-		rank1 = d1.cards.get(20).getRank();
-		suit1 = d1.cards.get(20).getSuit();
+		d1.setTopCard(20);
+		rank1 = d1.getCard().getRank();
+		d1.setTopCard(20);
+		suit1 = d1.getCard().getSuit();
+
+		d1.setTopCard(40);
 		rank2 = d1.cards.get(40).getRank();
+		d1.setTopCard(40);
 		suit2 = d1.cards.get(40).getSuit();
 
 		d1.shuffle();
 
-		rank3 = d1.cards.get(20).getRank();
-		suit3 = d1.cards.get(20).getSuit();
-		rank4 = d1.cards.get(40).getRank();
-		suit4 = d1.cards.get(40).getSuit();
+		d1.setTopCard(20);
+		rank3 = d1.getCard().getRank();
+		d1.setTopCard(20);
+		suit3 = d1.getCard().getSuit();
+		d1.setTopCard(40);
+		rank4 = d1.getCard().getRank();
+		d1.setTopCard(40);
+		suit4 = d1.getCard().getSuit();
 
 		if((rank1 == rank3) && (suit1 == suit3) && (rank2 == rank4) && (rank2 == rank4)) {
 			fail();

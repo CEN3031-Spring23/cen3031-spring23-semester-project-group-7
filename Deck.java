@@ -32,4 +32,8 @@ public class Deck {
         topCard++;
         return cards.get(topCard -1);
     }
+
+    public void setTopCard(int newTopCard) {
+        topCard = newTopCard;
+    }
 }
