@@ -153,5 +153,13 @@ public class Player {
 		}
 		return outputHand;
 	}
+	
+	public int getNumOfCards() {
+		return numCards;
+	}
+	
+	public Card getCard(int card) {
+		return hand[card];
+	}
 
 }
