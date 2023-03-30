@@ -17,7 +17,7 @@ public class MenuPanel extends JPanel {
 		
 		JLabel logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
-		logo.setIcon(new ImageIcon("/imgs/blackJackLogo7.png"));
+		logo.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/blackJackLogo7.png")));
 		logo.setBounds(0, 0, 1390, 305);
 		panel.add(logo);
 		btnHolder.setBackground(new Color(29, 74, 146));
@@ -42,7 +42,7 @@ public class MenuPanel extends JPanel {
 		
 		JLabel chipsIcon = new JLabel("");
 		chipsIcon.setHorizontalAlignment(SwingConstants.CENTER);
-		chipsIcon.setIcon(new ImageIcon(("/imgs/chips2.png")));
+		chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips2.png")));
 		chipsIcon.setBounds(6, 6, 612, 443);
 		btnHolder.add(chipsIcon);
 	}
