@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 public class RulesPanel extends JPanel {
 	
 	private JPanel rulesPanel;
-	private JButton exitButton2;
 	private JLabel rulesLabel; 
 	private String rules;
+	public JButton exitButton2;
 	
 	public RulesPanel () {
 		
