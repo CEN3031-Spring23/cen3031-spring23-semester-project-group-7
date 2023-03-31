@@ -51,6 +51,12 @@ public class MainFrame extends JFrame{
 				swapPanel(game);
 			}
 		});
+
+        game.homeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                swapPanel(menu.getMenu());
+            }
+        });
 		
 	}
 	
