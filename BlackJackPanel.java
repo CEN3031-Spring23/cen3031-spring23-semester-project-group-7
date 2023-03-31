@@ -7,6 +7,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BlackJackPanel extends JPanel {
 	private JPanel playerPanel;
@@ -23,6 +25,9 @@ public class BlackJackPanel extends JPanel {
 	private JPanel chipPanel;
 	private JPanel deckPanel;
 	private JSpinner customBetSpinner;
+	public JButton homeButton;
+	private JButton exitButton;
+	private JPanel navigationPanel;
 
 	/**
 	 * Create the panel.
@@ -116,6 +121,26 @@ public class BlackJackPanel extends JPanel {
 		deckPanel = new JPanel();
 		deckPanel.setBounds(506, 282, 310, 239);
 		add(deckPanel);
+		
+		navigationPanel = new JPanel();
+		navigationPanel.setBounds(546, 11, 203, 56);
+		add(navigationPanel);
+		navigationPanel.setLayout(null);
+		
+		homeButton = new JButton("Home");
+		homeButton.setBounds(10, 11, 85, 40);
+		homeButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		navigationPanel.add(homeButton);
+		
+		exitButton = new JButton("Exit");
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		exitButton.setBounds(108, 11, 85, 40);
+		navigationPanel.add(exitButton);
 
 	}
 }
