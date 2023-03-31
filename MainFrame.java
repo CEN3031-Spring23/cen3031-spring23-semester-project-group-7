@@ -45,10 +45,18 @@ public class MainFrame extends JFrame{
 		layeredPane.add(menu.getMenu(), "menuPanel");
 		BlackJackPanel game = new BlackJackPanel();
 		layeredPane.add(game);
+		RulesPanel rules = new RulesPanel();
+		layeredPane.add(rules.getRules());
 		
 		menu.start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				swapPanel(game);
+			}
+		});
+		
+		menu.rules.addActionListener(new ActionListener () { 
+			public void actionPerformed(ActionEvent e) {
+				swapPanel(rules.getRules());			
 			}
 		});
 
@@ -56,6 +64,12 @@ public class MainFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 swapPanel(menu.getMenu());
             }
+        });
+        
+        rules.exitButton2.addActionListener(new ActionListener() { 
+        	public void actionPerformed(ActionEvent e) {
+        		swapPanel(menu.getMenu());
+        	}
         });
 		
 	}
