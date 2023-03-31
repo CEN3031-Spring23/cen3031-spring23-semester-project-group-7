@@ -7,44 +7,59 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class MenuPanel extends JPanel {
+	private JPanel panel;
+	private JLabel logo;
+	private JPanel btnHolder;
+	public JButton start;
+	public JButton rules;
+	public JButton shop;
+	private JLabel chipsIcon;
+
+	/**
+	 * Create the panel.
+	 */
 	public MenuPanel() {
-		final JPanel btnHolder = new JPanel();
+		panel = new JPanel();
+		btnHolder = new JPanel();
 		
-		JPanel panel = new JPanel();
 		panel.setBackground(new Color(29, 74, 146));
-		panel.setBounds(0, 0, 1396, 772);
+		panel.setBounds(0, 0, 1400, 772);
 		panel.setLayout(null);
 		
-		JLabel logo = new JLabel("");
+		logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 		logo.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/blackJackLogo7.png")));
-		logo.setBounds(0, 0, 1390, 305);
+		logo.setBounds(0, 0, 1400, 305);
 		panel.add(logo);
 		btnHolder.setBackground(new Color(29, 74, 146));
 		btnHolder.setBounds(0, 317, 1396, 455);
 		panel.add(btnHolder);
 		btnHolder.setLayout(null);
 		
-		JButton start = new JButton("Start Game");
-		start.setForeground(Color.WHITE);
-		start.setBounds(630, 66, 183, 68);
+		start = new JButton("Start Game");
+		start.setForeground(Color.BLACK);
+		start.setBounds(619, 66, 183, 68);
 		btnHolder.add(start);
 		
-		JButton rules = new JButton("Rules");
-		rules.setForeground(Color.WHITE);
-		rules.setBounds(630, 174, 183, 68);
+		rules = new JButton("Rules");
+		rules.setForeground(Color.BLACK);
+		rules.setBounds(619, 174, 183, 68);
 		btnHolder.add(rules);
 		
-		JButton shop = new JButton("Shop");
-		shop.setForeground(Color.WHITE);
-		shop.setBounds(630, 279, 183, 68);
+		shop = new JButton("Shop");
+		shop.setForeground(Color.BLACK);
+		shop.setBounds(619, 279, 183, 68);
 		btnHolder.add(shop);
 		
-		JLabel chipsIcon = new JLabel("");
+		chipsIcon = new JLabel("");
 		chipsIcon.setHorizontalAlignment(SwingConstants.CENTER);
 		chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips2.png")));
 		chipsIcon.setBounds(6, 6, 612, 443);
 		btnHolder.add(chipsIcon);
+	}
+	
+	public JPanel getMenu() { 
+		return panel;
 	}
 
 }
