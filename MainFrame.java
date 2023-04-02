@@ -47,6 +47,8 @@ public class MainFrame extends JFrame{
 		layeredPane.add(game);
 		RulesPanel rules = new RulesPanel();
 		layeredPane.add(rules.getRules());
+		ShopPanel shop = new ShopPanel();
+		layeredPane.add(shop.getShop());
 		
 		menu.start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,6 +71,12 @@ public class MainFrame extends JFrame{
         rules.exitButton2.addActionListener(new ActionListener() { 
         	public void actionPerformed(ActionEvent e) {
         		swapPanel(menu.getMenu());
+        	}
+        });
+        
+        menu.shop.addActionListener(new ActionListener() { 
+        	public void actionPerformed(ActionEvent e) {
+        		swapPanel(shop.getShop());
         	}
         });
 		
