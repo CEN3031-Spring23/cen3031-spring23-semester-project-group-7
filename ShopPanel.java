@@ -46,7 +46,7 @@ public class ShopPanel extends JPanel {
 		deck1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentDeck = 1;
-				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/landonDeckFinal.png"));
+				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/landonDeckFinal.png"));
 				Image image = i1.getImage();
 				Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
 				i1 = new ImageIcon(scaleImage);
@@ -102,7 +102,7 @@ public class ShopPanel extends JPanel {
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(currentDeck == 1) {
-					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/landonBackOfCard.png"));
+					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/landonBackOfCard.png"));
 					display.setIcon(back1);
 				}
 				if(currentDeck == 2) {
@@ -116,7 +116,7 @@ public class ShopPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(currentDeck == 1) {
 					currentDeck = 1;
-					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/landonDeckFinal.png"));
+					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/landonDeckFinal.png"));
 					Image image = i1.getImage();
 					Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
 					i1 = new ImageIcon(scaleImage);
