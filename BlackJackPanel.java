@@ -180,10 +180,20 @@ public class BlackJackPanel extends JPanel {
 		allInButton = new JRadioButton("All In ($0)");
 		allInButton.setBounds(10, 67, 92, 43);
 		bettingPanel.add(allInButton);
+		allInButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				customBetSpinner.setValue(tokens);
+			}
+		});
 		
-		minimumButton = new JRadioButton("Minimum ($0)");
+		minimumButton = new JRadioButton("Minimum (1)");
 		minimumButton.setBounds(10, 113, 92, 43);
 		bettingPanel.add(minimumButton);
+		minimumButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				customBetSpinner.setValue(1);
+			}
+		});
 		
 		customBetButton = new JRadioButton("Custom");
 		customBetButton.setBounds(10, 159, 92, 43);
