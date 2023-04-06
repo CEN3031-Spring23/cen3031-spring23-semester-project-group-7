@@ -61,7 +61,11 @@ public class ShopPanel extends JPanel {
 		deck2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentDeck = 2;
-				display.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleDeck.png")));
+				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleDeck.png"));
+				Image image = i1.getImage();
+				Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+				i1 = new ImageIcon(scaleImage);
+				display.setIcon(i1);
 			}
 		});
 		
@@ -71,7 +75,12 @@ public class ShopPanel extends JPanel {
 		deck3.setBounds(37, 437, 183, 68);
 		deck3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				display.setIcon(new ImageIcon(ShopPanel.class.getResource("")));
+				currentDeck = 3;
+				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/jackDeck.png"));
+				Image image = i1.getImage();
+				Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+				i1 = new ImageIcon(scaleImage);
+				display.setIcon(i1);
 			}
 		});
 		shopPanel.add(deck3);
@@ -80,7 +89,12 @@ public class ShopPanel extends JPanel {
 		deck4.setBounds(37, 537, 183, 68);
 		deck4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				display.setIcon(new ImageIcon(ShopPanel.class.getResource("")));
+				currentDeck = 4;
+				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/bdtDeckStyle.png"));
+				Image image = i1.getImage();
+				Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+				i1 = new ImageIcon(scaleImage);
+				display.setIcon(i1);
 			}
 		});
 		shopPanel.add(deck4);
@@ -89,7 +103,12 @@ public class ShopPanel extends JPanel {
 		deck5.setBounds(37, 637, 183, 68);
 		deck5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				display.setIcon(new ImageIcon(ShopPanel.class.getResource("")));
+				currentDeck = 5;
+				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/Doodle_Deck.png"));
+				Image image = i1.getImage();
+				Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+				i1 = new ImageIcon(scaleImage);
+				display.setIcon(i1);
 			}
 		});
 		shopPanel.add(deck5);
@@ -109,6 +128,18 @@ public class ShopPanel extends JPanel {
 					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleCardBack.png"));
 					display.setIcon(back1);
 				}
+				if(currentDeck == 3) {
+					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/jackBack.png"));
+					display.setIcon(back1);
+				}
+				if(currentDeck == 4) {
+					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/bdtBackOfCard.png"));
+					display.setIcon(back1);
+				}
+				if(currentDeck == 5) {
+					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/Doodle deck back.png"));
+					display.setIcon(back1);
+				}
 			}
 		});	
 		
@@ -124,7 +155,35 @@ public class ShopPanel extends JPanel {
 				}
 				if(currentDeck == 2) {
 					currentDeck = 2;
-					display.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleCardBack.png")));
+					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleDeck.png"));
+					Image image = i1.getImage();
+					Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+					i1 = new ImageIcon(scaleImage);
+					display.setIcon(i1);
+				}
+				if(currentDeck == 3) {
+					currentDeck = 3;
+					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/jackDeck.png"));
+					Image image = i1.getImage();
+					Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+					i1 = new ImageIcon(scaleImage);
+					display.setIcon(i1);
+				}
+				if(currentDeck == 4) {
+					currentDeck = 4;
+					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/bdtDeckStyle.png"));
+					Image image = i1.getImage();
+					Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+					i1 = new ImageIcon(scaleImage);
+					display.setIcon(i1);
+				}
+				if(currentDeck == 5) {
+					currentDeck = 5;
+					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/Doodle_Deck.png"));
+					Image image = i1.getImage();
+					Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
+					i1 = new ImageIcon(scaleImage);
+					display.setIcon(i1);
 				}
 			}
 		});	
