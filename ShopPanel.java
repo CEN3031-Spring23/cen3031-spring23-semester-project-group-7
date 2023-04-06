@@ -46,7 +46,7 @@ public class ShopPanel extends JPanel {
 		deck1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentDeck = 1;
-				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/landonDeckFinal.png"));
+				ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/landonCardsFinalResize.png"));
 				Image image = i1.getImage();
 				Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
 				i1 = new ImageIcon(scaleImage);
@@ -61,7 +61,7 @@ public class ShopPanel extends JPanel {
 		deck2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentDeck = 2;
-				display.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/blackJackLogo7.png")));
+				display.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleDeck.png")));
 			}
 		});
 		
@@ -106,7 +106,7 @@ public class ShopPanel extends JPanel {
 					display.setIcon(back1);
 				}
 				if(currentDeck == 2) {
-					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/chips2.png"));
+					ImageIcon back1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleCardBack.png"));
 					display.setIcon(back1);
 				}
 			}
@@ -116,7 +116,7 @@ public class ShopPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(currentDeck == 1) {
 					currentDeck = 1;
-					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/landonDeckFinal.png"));
+					ImageIcon i1 = new ImageIcon(ShopPanel.class.getResource("/imgs/styles/landonCardsFinalResize.png"));
 					Image image = i1.getImage();
 					Image scaleImage = image.getScaledInstance(745, 468, Image.SCALE_DEFAULT);
 					i1 = new ImageIcon(scaleImage);
@@ -124,7 +124,7 @@ public class ShopPanel extends JPanel {
 				}
 				if(currentDeck == 2) {
 					currentDeck = 2;
-					display.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/blackJackLogo7.png")));
+					display.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/styles/simpleCardBack.png")));
 				}
 			}
 		});	
