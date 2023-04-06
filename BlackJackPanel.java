@@ -128,6 +128,7 @@ public class BlackJackPanel extends JPanel {
 		playerOptionsPanel.setBounds(411, 539, 232, 172);
 		add(playerOptionsPanel);
 		playerOptionsPanel.setLayout(null);
+		playerOptionsPanel.setOpaque(false);
 		
 		JButton hitButton = new JButton("Hit");
 		hitButton.setBounds(10, 11, 95, 72);
@@ -158,17 +159,20 @@ public class BlackJackPanel extends JPanel {
 		JButton doubleDownButton = new JButton("Double Down");
 		doubleDownButton.setBounds(10, 94, 95, 72);
 		playerOptionsPanel.add(doubleDownButton);
+		doubleDownButton.setEnabled(false);
 		
 		JButton splitButton = new JButton("Split");
 		splitButton.setBounds(127, 94, 95, 72);
 		playerOptionsPanel.add(splitButton);
+		splitButton.setEnabled(false);
 		
 		bettingPanel = new JPanel();
 		bettingPanel.setBounds(1059, 99, 316, 272);
 		add(bettingPanel);
 		bettingPanel.setLayout(null);
+		bettingPanel.setOpaque(false);
 		
-		betAmountLabel = new JLabel("Betting: $0");
+		betAmountLabel = new JLabel("Chips: " + tokens);
 		betAmountLabel.setBounds(10, 11, 168, 37);
 		betAmountLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		bettingPanel.add(betAmountLabel);
@@ -215,6 +219,7 @@ public class BlackJackPanel extends JPanel {
 		chipPanel = new JPanel();
 		chipPanel.setBounds(33, 391, 296, 302);
 		add(chipPanel);
+		chipPanel.setOpaque(false);
 		
 		deckPanel = new JPanel();
 		deckPanel.setBounds(506, 282, 310, 239);
@@ -228,6 +233,7 @@ public class BlackJackPanel extends JPanel {
 		navigationPanel.setBounds(546, 11, 300, 56);
 		add(navigationPanel);
 		navigationPanel.setLayout(null);
+		navigationPanel.setOpaque(false);
 		
 		homeButton = new JButton("Home");
 		homeButton.setBounds(10, 11, 85, 40);
@@ -414,6 +420,7 @@ public class BlackJackPanel extends JPanel {
 		playerTurn = false;
 		gameOver = true;
 		JOptionPane.showMessageDialog(null, "You Win!");
+		betAmountLabel.setText("Chips: " + tokens);
 		playAgain.setEnabled(true);
 	}
 	
@@ -421,6 +428,7 @@ public class BlackJackPanel extends JPanel {
 		playerTurn = false;
 		gameOver = true;
 		JOptionPane.showMessageDialog(null, "You Lose!");
+		betAmountLabel.setText("Chips: " + tokens);
 		playAgain.setEnabled(true);
 	}
 	
@@ -428,6 +436,7 @@ public class BlackJackPanel extends JPanel {
 		playerTurn = false;
 		gameOver = true;
 		JOptionPane.showMessageDialog(null, "Push, chips back");
+		betAmountLabel.setText("Chips: " + tokens);
 		playAgain.setEnabled(true);
 	}
 	
