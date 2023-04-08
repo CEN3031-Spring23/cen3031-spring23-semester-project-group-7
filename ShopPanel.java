@@ -22,6 +22,7 @@ public class ShopPanel extends JPanel {
 	private JLabel title;
 	public JButton front;
 	public JButton back;
+	public JButton homeButton;
 	private JTextField txtPrice;
 	
 	private int currentDeck;
@@ -114,7 +115,7 @@ public class ShopPanel extends JPanel {
 		shopPanel.add(deck5);
 		
 		title = new JLabel("");
-		title.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/shoptitle.png")));
+		title.setIcon(new ImageIcon(ShopPanel.class.getResource("/imgs/shoptitle.png.png")));
 		title.setBounds(255, 37, 745, 170);
 		shopPanel.add(title);
 		
@@ -201,6 +202,10 @@ public class ShopPanel extends JPanel {
 		txtPrice.setBounds(1037, 626, 111, 34);
 		shopPanel.add(txtPrice);
 		txtPrice.setColumns(10);
+		
+		homeButton = new JButton("Home");
+		homeButton.setBounds(37, 139, 183, 68);
+		shopPanel.add(homeButton);
 	}
 	
 	public JPanel getShop() {
