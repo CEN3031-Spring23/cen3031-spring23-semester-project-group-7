@@ -80,6 +80,12 @@ public class MainFrame extends JFrame{
         	}
         });
 		
+	shop.homeButton.addActionListener(new ActionListener() { 
+        	public void actionPerformed(ActionEvent e) {
+        		swapPanel(menu.getMenu());
+        	}
+        });
+		
 	}
 	
 	public void swapPanel(JPanel panel) {
