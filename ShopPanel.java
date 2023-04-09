@@ -20,10 +20,11 @@ public class ShopPanel extends JPanel {
 	public JButton deck4;
 	public JButton deck5;
 	private JLabel title;
-	public JButton front;
-	public JButton back;
+	private JButton front;
+	private JButton back;
 	public JButton homeButton;
 	private JTextField txtPrice;
+	private JButton purchaseButton;
 	
 	private int currentDeck;
 	
@@ -193,9 +194,9 @@ public class ShopPanel extends JPanel {
 		shopPanel.add(front);
 		shopPanel.add(back);
 		
-		JButton btnNewButton = new JButton("Purchase");
-		btnNewButton.setBounds(1037, 671, 111, 34);
-		shopPanel.add(btnNewButton);
+		purchaseButton = new JButton("Purchase");
+		purchaseButton.setBounds(1037, 671, 111, 34);
+		shopPanel.add(purchaseButton);
 		
 		txtPrice = new JTextField();
 		txtPrice.setText("Price:");
