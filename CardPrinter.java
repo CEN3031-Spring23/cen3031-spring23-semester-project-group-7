@@ -10,18 +10,10 @@ public class CardPrinter {
 	private BufferedImage cardBack;
 	private BufferedImage cardFaces;
 	private BufferedImage[][] faces;
-	private int playerX;
-	private int playerY;
-	private int dealerX;
-	private int dealerY;
 	
 	public CardPrinter() {
 		faceStyle = "simpleDeck.png";
 		backStyle = "simpleCardBack.png";
-		playerX = 0;
-		playerY = 0;
-		dealerX = 0;
-		dealerY = 0;
 	}
 	
 	public void setStyle(String faceStyle, String backStyle) {
