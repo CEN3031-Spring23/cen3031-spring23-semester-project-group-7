@@ -16,8 +16,8 @@ public class CardPrinter {
 	private int dealerY;
 	
 	public CardPrinter() {
-		faceStyle = "default.png";
-		backStyle = "defaultBack.png";
+		faceStyle = "simpleDeckBack.png";
+		backStyle = "simpleDeck.png";
 		playerX = 0;
 		playerY = 0;
 		dealerX = 0;
@@ -31,7 +31,7 @@ public class CardPrinter {
 	
 	public ImageIcon getBack() {
 		try {
-			cardBack = ImageIO.read(new File("src/imgs/styles/defaultBack.png"));
+			cardBack = ImageIO.read(new File("src/imgs/styles/" + backStyle));
 			ImageIcon back = new ImageIcon(cardBack);
 			return back;
 		} catch (IOException e) {
@@ -42,7 +42,7 @@ public class CardPrinter {
 	
 	public ImageIcon getFace(int suit, int rank) {
 		try {
-			cardFaces = ImageIO.read(new File("src/imgs/styles/default.png"));
+			cardFaces = ImageIO.read(new File("src/imgs/styles/" + faceStyle));
 			faces = new BufferedImage[4][13];
 			
 			for(int i = 0; i < 4; i++) {
