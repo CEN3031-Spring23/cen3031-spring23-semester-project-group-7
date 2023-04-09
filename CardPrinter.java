@@ -29,6 +29,10 @@ public class CardPrinter {
 		this.backStyle = backStyle;
 	}
 	
+	/**
+	 * Returns an ImageIcon for the back of a card 
+	 * based on the set backStyle
+	 */
 	public ImageIcon getBack() {
 		try {
 			cardBack = ImageIO.read(new File("src/imgs/styles/" + backStyle));
@@ -40,6 +44,11 @@ public class CardPrinter {
 		return null;
 	}
 	
+	/**
+	 * Returns an ImageIcon for the face of a card
+	 * by using the suit and rank to clip out an image
+	 * from the set faceStlye
+	 */
 	public ImageIcon getFace(int suit, int rank) {
 		try {
 			cardFaces = ImageIO.read(new File("src/imgs/styles/" + faceStyle));

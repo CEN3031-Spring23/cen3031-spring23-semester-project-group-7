@@ -16,7 +16,6 @@ public class Dealer {
 		value += newCard.getValue();
 	}
 
-
 	public void clearHand() {
 		for(int i = 0; i < numOfCards; i++) {
 			hand[i] = null;
@@ -35,7 +34,11 @@ public class Dealer {
 			value += hand[i].getValue();
 		}
 	}
-
+	
+	/**
+	 * Recalculates the dealer's hand when they have at
+	 * least one ace and have busted
+	 */
 	public void aceBuster(){
 		for(int i = 0; i < numOfCards; i++){
 			if(hand[i].getRank() == 1){

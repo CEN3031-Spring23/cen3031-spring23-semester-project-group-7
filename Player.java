@@ -1,12 +1,13 @@
 public class Player {
+	private static final int MAX_VALUE = 11;
 	private int value;
 	private Card hand[];
 	private int numOfCards;
-	private static final int MAX_VALUE = 11;
 
 	public Player() {
 		value = 0;
 		hand = new Card[MAX_VALUE];
+		numOfCards = 0;
 	}
 	
 	public void addCard(Card card) {
@@ -34,6 +35,10 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * Recalculates the player's hand when they have at
+	 * least one ace and have busted
+	 */
 	public void aceBuster() {
 		for (int i = 0; i < numOfCards; i++) {
 			if (hand[i].getRank() == 1) {
