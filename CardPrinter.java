@@ -16,8 +16,8 @@ public class CardPrinter {
 	private int dealerY;
 	
 	public CardPrinter() {
-		faceStyle = "simpleDeckBack.png";
-		backStyle = "simpleDeck.png";
+		faceStyle = "simpleDeck.png";
+		backStyle = "simpleCardBack.png";
 		playerX = 0;
 		playerY = 0;
 		dealerX = 0;
