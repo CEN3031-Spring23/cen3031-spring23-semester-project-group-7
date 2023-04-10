@@ -9,7 +9,13 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
 	
+	private JPanel contentPane;
 	private JLayeredPane layeredPane;
+	private MenuPanel menu;
+	private BlackJackPanel game;
+	private RulesPanel rules;
+	private ShopPanel shop;
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -25,13 +31,13 @@ public class MainFrame extends JFrame{
 	}
 	
 	
-	MainFrame() {
+	public MainFrame() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0,0,1400,800);
 		setResizable(false);
 		
-		JPanel contentPane = new JPanel();
+		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -41,13 +47,13 @@ public class MainFrame extends JFrame{
 		layeredPane.setVisible(true);
 		contentPane.add(layeredPane);
 		
-		MenuPanel menu = new MenuPanel();
+		menu = new MenuPanel();
 		layeredPane.add(menu.getMenu(), "menuPanel");
-		BlackJackPanel game = new BlackJackPanel();
+		game = new BlackJackPanel();
 		layeredPane.add(game);
-		RulesPanel rules = new RulesPanel();
+		rules = new RulesPanel();
 		layeredPane.add(rules.getRules());
-		ShopPanel shop = new ShopPanel();
+		shop = new ShopPanel();
 		layeredPane.add(shop.getShop());
 		
 		menu.start.addActionListener(new ActionListener() {

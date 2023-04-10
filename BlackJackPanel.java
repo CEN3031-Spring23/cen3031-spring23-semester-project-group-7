@@ -34,9 +34,9 @@ public class BlackJackPanel extends JPanel {
 	private JLabel deckImg;
 	private JButton playAgain;
 	private int x;
-	CardPrinter cp = new CardPrinter();
-	JLabel[] pCards = new JLabel[11];
-	JLabel[] dCards = new JLabel[11];
+	private CardPrinter cp;
+	private JLabel[] pCards;
+	private JLabel[] dCards;
 	
 	
 	
@@ -69,6 +69,9 @@ public class BlackJackPanel extends JPanel {
 		deck = new Deck();
 		gameOver = false;
 		playerTurn = true;
+		cp = new CardPrinter();
+		pCards = new JLabel[11];
+		dCards = new JLabel[11];
 		
 		
 		
