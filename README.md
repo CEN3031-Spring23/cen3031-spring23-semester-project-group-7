@@ -50,7 +50,7 @@ In order to execute the Blackjack GUI, please run "MainFrame.java"
 
 
 #### **Using The Shop**
-*Note: The shop does not currently allow you to buy or change the sytle of the deck in game*
+*Note: The shop does not currently allow you to buy or change the style of the deck in game*
 1. Select the "Shop" button on the menu screen
 2. Select desired deck from the list of decks
     - You can switch between the the front and back of the deck by selecting the "Front" or "Back" button
