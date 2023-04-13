@@ -13,7 +13,7 @@ public class Deck {
                     Card card = new Card(i, 11, j);
                 	cards.add(card);
                 } else if(j < 11) {
-                    Card card = new Card(i, j, j);
+                    Card card = new Card(i, j - 1, j);
                     cards.add(card);
                 } else {
                     Card card = new Card(i, 10, j);

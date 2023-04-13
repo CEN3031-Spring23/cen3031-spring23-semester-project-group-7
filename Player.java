@@ -50,113 +50,21 @@ public class Player {
 		}
 	}
 	
-	public Card[] getHand() {
-//		String outputHand = "Player Hand: ";
-//		for(int i = 0; i < numOfCards; i++) {
-//			if(i == numOfCards - 1) {
-//				if(hand[i].getSuit() == 0) {
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Clubs";
-//					} else if(hand[i].getRank() == 11) {
-//						outputHand += "Jack of Clubs";
-//					} else if(hand[i].getRank() == 12) {
-//						outputHand +=  "Queen of Clubs";
-//					} else if(hand[i].getRank() == 13) {
-//						outputHand +=  "King of Clubs";
-//					} else {
-//						outputHand += hand[i].getRank() + " of Clubs";
-//					}
-//				} else if(hand[i].getSuit() == 1){
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Spades";
-//					} else if(hand[i].getRank() == 11) {
-//						outputHand += "Jack of Spades";
-//					} else if(hand[i].getRank() == 12) {
-//						outputHand +=  "Queen of Spades";
-//					} else if(hand[i].getRank() == 13) {
-//						outputHand +=  "King of Spades";
-//					} else {
-//						outputHand += hand[i].getRank() + " of Spades";
-//					}
-//				} else if(hand[i].getSuit() == 2){
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Diamonds";
-//					} else if(hand[i].getRank() == 11) {
-//						outputHand += "Jack of Diamonds";
-//					} else if(hand[i].getRank() == 12) {
-//						outputHand +=  "Queen of Diamonds";
-//					} else if(hand[i].getRank() == 13) {
-//						outputHand +=  "King of Diamonds";
-//					} else {
-//						outputHand += hand[i].getRank() + " of Diamonds";
-//					}
-//				} else if(hand[i].getSuit() == 3){
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Hearts";
-//					} else if(hand[i].getRank() == 11) {
-//						outputHand += "Jack of Hearts";
-//					} else if(hand[i].getRank() == 12) {
-//						outputHand +=  "Queen of Hearts";
-//					} else if(hand[i].getRank() == 13) {
-//						outputHand +=  "King of Hearts";
-//					} else {
-//						outputHand += hand[i].getRank() + " of Hearts";
-//					}
-//			    }
-//			} else {
-//				if(hand[i].getSuit() == 0) {
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Clubs, ";
-//					} else if(hand[i].getRank() == 11) {
-//					outputHand += "Jack of Clubs, ";
-//					} else if(hand[i].getRank() == 12) {
-//					outputHand +=  "Queen of Clubs, ";
-//					} else if(hand[i].getRank() == 13) {
-//					outputHand +=  "King of Clubs, ";
-//					} else {
-//					outputHand += hand[i].getRank() + " of Clubs, ";
-//					}
-//				} else if(hand[i].getSuit() == 1){
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Spades, ";
-//					} else if(hand[i].getRank() == 11) {
-//						outputHand += "Jack of Spades, ";
-//					} else if(hand[i].getRank() == 12) {
-//						outputHand +=  "Queen of Spades, ";
-//					} else if(hand[i].getRank() == 13) {
-//						outputHand +=  "King of Spades, ";
-//					} else {
-//						outputHand += hand[i].getRank() + " of Spades, ";
-//					}
-//				} else if(hand[i].getSuit() == 2){
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Diamonds, ";
-//					} else if(hand[i].getRank() == 11) {
-//						outputHand += "Jack of Diamonds, ";
-//					} else if(hand[i].getRank() == 12) {
-//						outputHand +=  "Queen of Diamonds, ";
-//					} else if(hand[i].getRank() == 13) {
-//						outputHand +=  "King of Diamonds, ";
-//					} else {
-//						outputHand += hand[i].getRank() + " of Diamonds, ";
-//					}
-//				} else if(hand[i].getSuit() == 3){
-//					if(hand[i].getRank() == 1) {
-//						outputHand += "Ace of Hearts, ";
-//					} else if(hand[i].getRank() == 11) {
-//						outputHand += "Jack of Hearts, ";
-//					} else if(hand[i].getRank() == 12) {
-//						outputHand +=  "Queen of Hearts, ";
-//					} else if(hand[i].getRank() == 13) {
-//						outputHand +=  "King of Hearts, ";
-//					} else {
-//						outputHand += hand[i].getRank() + " of Hearts, ";
-//					}
-//				}
-//			}
-//		}
-//		return outputHand;
-		return hand;
+	public String getHand() {
+		String handValue = "";
+		int numOfAces = 0;
+		int tempValue = getValue();
+		
+		handValue += tempValue;
+		for(int i = 0; i < numOfCards; i++) {
+			if(hand[i].getRank() == 1 && hand[i].getValue() != 1) {
+				tempValue -= 10;
+				handValue += "/" + tempValue;
+			}
+				
+		}
+		
+		return handValue;
 	}
 	
 	public int getNumOfCards() {
