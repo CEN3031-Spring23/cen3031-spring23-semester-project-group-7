@@ -52,7 +52,6 @@ public class Player {
 	
 	public String getHand() {
 		String handValue = "";
-		int numOfAces = 0;
 		int tempValue = getValue();
 		
 		handValue += tempValue;
