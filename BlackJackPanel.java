@@ -4,8 +4,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import javax.swing.JRadioButton;
 import javax.swing.SpinnerNumberModel;

@@ -56,10 +56,15 @@ public class MenuPanel extends JPanel {
 		chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips2.png")));
 		chipsIcon.setBounds(6, 6, 612, 443);
 		btnHolder.add(chipsIcon);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/cardsLogo.png")));
+		lblNewLabel.setBounds(833, 6, 557, 443);
+		btnHolder.add(lblNewLabel);
 	}
 	
 	public JPanel getMenu() { 
 		return panel;
 	}
-
 }
