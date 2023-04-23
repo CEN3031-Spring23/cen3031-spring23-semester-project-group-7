@@ -98,8 +98,8 @@ public class BlackJackPanel extends JPanel {
 			playerPanel.setComponentZOrder(pCards[i], 10 - i);
 		}
 		
-		playerValueLabel = new JLabel("Your Hand: " + player.getValue());
-		playerValueLabel.setBounds(537, 11, 192, 29);
+		playerValueLabel = new JLabel("Your Hand: " + player.getHand());
+		playerValueLabel.setBounds(450, 11, 300, 29);
 		playerValueLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		playerPanel.add(playerValueLabel);
 		
@@ -157,7 +157,7 @@ public class BlackJackPanel extends JPanel {
 			}
 		});
 		
-		JButton doubleDownButton = new JButton("Double Down");
+		JButton doubleDownButton = new JButton("<html><center>" + "Double" + "<br>" + "Down" + "</center></html>");
 		doubleDownButton.setBounds(10, 94, 95, 72);
 		playerOptionsPanel.add(doubleDownButton);
 		doubleDownButton.setEnabled(false);
@@ -179,7 +179,7 @@ public class BlackJackPanel extends JPanel {
 		bettingPanel.add(betAmountLabel);
 		
 		allInButton = new JRadioButton("All In ($0)");
-		allInButton.setBounds(10, 67, 92, 43);
+		allInButton.setBounds(10, 67, 110, 43);
 		bettingPanel.add(allInButton);
 		allInButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -188,7 +188,7 @@ public class BlackJackPanel extends JPanel {
 		});
 		
 		minimumButton = new JRadioButton("Minimum (1)");
-		minimumButton.setBounds(10, 113, 92, 43);
+		minimumButton.setBounds(10, 113, 110, 43);
 		bettingPanel.add(minimumButton);
 		minimumButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -197,7 +197,7 @@ public class BlackJackPanel extends JPanel {
 		});
 		
 		customBetButton = new JRadioButton("Custom");
-		customBetButton.setBounds(10, 159, 92, 43);
+		customBetButton.setBounds(10, 159, 110, 43);
 		bettingPanel.add(customBetButton);
 		
 		bettingGroup = new ButtonGroup();
@@ -224,7 +224,7 @@ public class BlackJackPanel extends JPanel {
 		
 		customBetSpinner = new JSpinner();
 		customBetSpinner.setModel(new SpinnerNumberModel(5, 5, 1000, 1));
-		customBetSpinner.setBounds(108, 159, 80, 43);
+		customBetSpinner.setBounds(130, 159, 80, 43);
 		bettingPanel.add(customBetSpinner);
 		
 		chipPanel = new JPanel();
@@ -241,29 +241,29 @@ public class BlackJackPanel extends JPanel {
 		add(deckPanel);
 		
 		navigationPanel = new JPanel();
-		navigationPanel.setBounds(546, 11, 300, 56);
+		navigationPanel.setBounds(546, 11, 320, 56);
 		add(navigationPanel);
 		navigationPanel.setLayout(null);
 		navigationPanel.setOpaque(false);
 		
 		homeButton = new JButton("Home");
-		homeButton.setBounds(10, 11, 85, 40);
+		homeButton.setBounds(5, 11, 100, 40);
 		homeButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		navigationPanel.add(homeButton);
 		
 		exitButton = new JButton("Exit");
+		exitButton.setBounds(108, 11, 100, 40);
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		exitButton.setBounds(108, 11, 85, 40);
 		navigationPanel.add(exitButton);
 		
 		playAgain = new JButton("Play Again");
 		playAgain.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		playAgain.setBounds(206, 11, 85, 40);
+		playAgain.setBounds(211, 11, 100, 40);
 		navigationPanel.add(playAgain);
 		playAgain.setEnabled(false);
 		playAgain.addActionListener(new ActionListener() {
@@ -288,7 +288,7 @@ public class BlackJackPanel extends JPanel {
 		for(int i = 0; i < player.getNumOfCards(); i++) {
 			pCards[i].setIcon(cp.getFace(player.getSuitOfCard(i), player.getRankOfCard(i) - 1));
 		}
-		playerValueLabel.setText("Your Hand " + player.getValue());
+		playerValueLabel.setText("Your Hand: " + player.getHand());
 	}
 	
 	public void displayDealerHand() {
@@ -461,7 +461,7 @@ public class BlackJackPanel extends JPanel {
 			pCards[i].setIcon(null);
 			dCards[i].setIcon(null);
 		}
-		playerValueLabel.setText("Your Hand " + player.getValue());
+		playerValueLabel.setText("Your Hand: " + player.getHand());
 		dealerValueLabel.setText("Dealer: " + dealer.getValue());
 	}
 }
