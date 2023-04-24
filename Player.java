@@ -50,6 +50,15 @@ public class Player {
 		}
 	}
 	
+	public Card split() {
+		Card temp = new Card();
+		temp = hand[1];
+		hand[1] = null;
+		numOfCards = 1;
+		recalculateHand();
+		return temp;
+  }
+
 	public String getHand() {
 		String handValue = "";
 		int tempValue = getValue();
@@ -62,7 +71,6 @@ public class Player {
 			}
 				
 		}
-		
 		return handValue;
 	}
 	
