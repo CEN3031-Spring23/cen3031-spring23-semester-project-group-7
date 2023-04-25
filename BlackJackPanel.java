@@ -229,9 +229,7 @@ public class BlackJackPanel extends JPanel {
 				doubleDown();    
 			}
 		});
-		
-		
-		
+
 		splitButton = new JButton("Split");
 		splitButton.setBounds(127, 94, 95, 72);
 		playerOptionsPanel.add(splitButton);
@@ -665,6 +663,10 @@ public class BlackJackPanel extends JPanel {
 		bet = newBet;
 		tokens -= bet;
 		updatePlayerChips();
+	}
+	
+	public int getBet() {
+		return bet;
 	}
 	
 	public int getBet() {
