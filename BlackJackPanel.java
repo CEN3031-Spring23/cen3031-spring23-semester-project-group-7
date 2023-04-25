@@ -1,3 +1,9 @@
+/**
+ * The BlackJackPanel is a subclass of the JPanel class.
+ * The BlackJackPanel provides users with a GUI to play 
+ * Blackjack as well as submit bets for their games.
+ */
+
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -11,6 +17,11 @@ import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
 public class BlackJackPanel extends JPanel {
@@ -87,7 +98,15 @@ public class BlackJackPanel extends JPanel {
 		pCards2 = new JLabel[11];
 		dCards = new JLabel[11];
 		
-		
+		try {
+			Scanner fileScanner = new Scanner(new File ("playerChips.txt"));
+			tokens = fileScanner.nextInt();
+			fileScanner.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: Missing Player Chips file");
+			e.printStackTrace();
+		}
 		
 		/**
 		 * This is all related to the GUI no logic
@@ -200,7 +219,7 @@ public class BlackJackPanel extends JPanel {
 			}
 		});
 		
-		JButton doubleDownButton = new JButton("<html><center>" + "Double" + "<br>" + "Down" + "</center></html>");
+		doubleDownButton = new JButton("<html><center>" + "Double" + "<br>" + "Down" + "</center></html>");
 		doubleDownButton.setBounds(10, 94, 95, 72);
 		playerOptionsPanel.add(doubleDownButton);
 		doubleDownButton.setEnabled(false);
@@ -227,17 +246,17 @@ public class BlackJackPanel extends JPanel {
 		});
 		
 		bettingPanel = new JPanel();
-		bettingPanel.setBounds(1059, 99, 316, 272);
+		bettingPanel.setBounds(1059, 99, 400, 272);
 		add(bettingPanel);
 		bettingPanel.setLayout(null);
 		bettingPanel.setOpaque(false);
 		
 		betAmountLabel = new JLabel("Chips: " + tokens);
-		betAmountLabel.setBounds(10, 11, 168, 37);
+		betAmountLabel.setBounds(10, 11, 250, 37);
 		betAmountLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		bettingPanel.add(betAmountLabel);
 		
-		allInButton = new JRadioButton("All In ($0)");
+		allInButton = new JRadioButton("All In");
 		allInButton.setBounds(10, 67, 110, 43);
 		bettingPanel.add(allInButton);
 		allInButton.addActionListener(new ActionListener() {
@@ -339,8 +358,16 @@ public class BlackJackPanel extends JPanel {
 	}
 	
 	public void printHands() {
+		cp.update();
 		displayPlayerHand();
 		displayDealerHand();
+		printDeck();
+		getPlayerTokens();
+	}
+	
+	public void printDeck() {
+		cp.update();
+		deckImg.setIcon(cp.getBack());
 	}
 	
 	public void displayPlayerHand() {
@@ -370,10 +397,6 @@ public class BlackJackPanel extends JPanel {
 			dealerValueLabel.setText("Dealer: " + dealer.getValue());
 		}
 	}
-	
-	
-	
-	
 	
 	/**
 	 * Under here will be the methods of the game logic
@@ -460,6 +483,7 @@ public class BlackJackPanel extends JPanel {
 		playerTurn = true;
 		clearHands();
 		isSplit = false;
+		getPlayerTokens();
 	}
 	
 	// The initial deal of the cards to dealer and player
@@ -489,6 +513,8 @@ public class BlackJackPanel extends JPanel {
 		} else {
 			tokens += bet;
 		}
+		
+		updatePlayerChips();
 	}
 	
 	// This method is a middle method that is mainly responsible for displaying the correct
@@ -538,6 +564,8 @@ public class BlackJackPanel extends JPanel {
 	
 	public void doubleDown() {
 		tokens -= bet;
+		updatePlayerChips();
+		getPlayerTokens();
 		bet = getBet() * 2;
 		player.addCard(deck.getCard());
 		printHands();
@@ -636,6 +664,7 @@ public class BlackJackPanel extends JPanel {
 	public void setBet(int newBet) {
 		bet = newBet;
 		tokens -= bet;
+		updatePlayerChips();
 	}
 	
 	public int getBet() {
@@ -654,6 +683,38 @@ public class BlackJackPanel extends JPanel {
 		dealerValueLabel.setText("Dealer: " + dealer.getValue());
 		if(isSplit) {
 			playerValueLabel2.setText("Your Hand " + player.getValue());
+		}
+	}
+	
+	/**
+	 * Updates the playerChips.txt that the shop manager 
+	 * needs to allow purchases
+	 */
+	public void updatePlayerChips() {
+		FileWriter writer;
+		try {
+			writer = new FileWriter("playerChips.txt");
+			writer.write(Integer.toString(tokens));
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Updates tokens and the betAmountLabel based 
+	 * on the value in playerChips.txt
+	 */
+	public void getPlayerTokens() {
+		try {
+			Scanner fileScanner = new Scanner(new File ("playerChips.txt"));
+			tokens = fileScanner.nextInt();
+			fileScanner.close();
+			betAmountLabel.setText("Chips: " + tokens);
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: Missing Player Chips file");
+			e.printStackTrace();
 		}
 	}
 }
