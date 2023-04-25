@@ -1,3 +1,9 @@
+/**
+ * The BlackJackPanel is a subclass of the JPanel class.
+ * The BlackJackPanel provides users with a GUI to play 
+ * Blackjack as well as submit bets for their games.
+ */
+
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -11,11 +17,18 @@ import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
 public class BlackJackPanel extends JPanel {
 	private JPanel playerPanel;
+	private JPanel playerPanel2;
 	private JLabel playerValueLabel;
+	private JLabel playerValueLabel2;
 	private JPanel dealerPanel;
 	private JLabel dealerValueLabel;
 	private JPanel playerOptionsPanel;
@@ -33,9 +46,14 @@ public class BlackJackPanel extends JPanel {
 	private JPanel navigationPanel;
 	private JLabel deckImg;
 	private JButton playAgain;
+	private JButton hitButton;
+	private JButton standButton;
+	private JButton doubleDownButton;
+	private JButton splitButton;
 	private int x;
 	private CardPrinter cp;
 	private JLabel[] pCards;
+	private JLabel[] pCards2;
 	private JLabel[] dCards;
 	
 	
@@ -47,9 +65,12 @@ public class BlackJackPanel extends JPanel {
 	private int tokens;
 	private Dealer dealer;
 	private Player player;
+	private Player player2;
 	private Deck deck;
 	private boolean gameOver;
 	private boolean playerTurn;
+	private boolean isSplit;
+	private boolean player2Turn;
 	
 	
 	
@@ -66,14 +87,26 @@ public class BlackJackPanel extends JPanel {
 		tokens = 100;
 		dealer = new Dealer();
 		player = new Player();
+		player2 = new Player();
 		deck = new Deck();
 		gameOver = false;
 		playerTurn = true;
+		isSplit = false;
+		player2Turn = false;
 		cp = new CardPrinter();
 		pCards = new JLabel[11];
+		pCards2 = new JLabel[11];
 		dCards = new JLabel[11];
 		
-		
+		try {
+			Scanner fileScanner = new Scanner(new File ("playerChips.txt"));
+			tokens = fileScanner.nextInt();
+			fileScanner.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: Missing Player Chips file");
+			e.printStackTrace();
+		}
 		
 		/**
 		 * This is all related to the GUI no logic
@@ -98,10 +131,35 @@ public class BlackJackPanel extends JPanel {
 			playerPanel.setComponentZOrder(pCards[i], 10 - i);
 		}
 		
-		playerValueLabel = new JLabel("Your Hand: " + player.getValue());
-		playerValueLabel.setBounds(537, 11, 192, 29);
+		playerValueLabel = new JLabel("Your Hand: " + player.getHand());
+		playerValueLabel.setBounds(450, 11, 300, 29);
 		playerValueLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		playerPanel.add(playerValueLabel);
+		
+		// Second card area only used when hand is split
+		playerPanel2 = new JPanel();
+		playerPanel2.setBounds(651, 365, 739, 172);
+		add(playerPanel2);
+		playerPanel2.setLayout(null);
+		playerPanel2.setOpaque(false);
+		
+		x = 0;
+		for(int i = 0; i < 11; i++) {
+			pCards2[i] = new JLabel();
+			pCards2[i].setBounds(x, 0, 115, 172);
+			pCards2[i].setOpaque(false);
+			playerPanel2.add(pCards2[i]);
+			x += 57;
+		}
+		for(int i = 10; i >= 0; i--) {
+			playerPanel2.setComponentZOrder(pCards2[i], 10 - i);
+		}
+		
+		playerValueLabel2 = new JLabel("Your Hand: " + player.getValue());
+		playerValueLabel2.setBounds(537, 11, 192, 29);
+		playerValueLabel2.setFont(new Font("Tahoma", Font.BOLD, 24));
+		playerPanel2.add(playerValueLabel2);
+		playerPanel2.setVisible(false);
 		
 		dealerPanel = new JPanel();
 		dealerPanel.setBounds(10, 99, 739, 172);
@@ -131,7 +189,7 @@ public class BlackJackPanel extends JPanel {
 		playerOptionsPanel.setLayout(null);
 		playerOptionsPanel.setOpaque(false);
 		
-		JButton hitButton = new JButton("Hit");
+		hitButton = new JButton("Hit");
 		hitButton.setBounds(10, 11, 95, 72);
 		playerOptionsPanel.add(hitButton);
 		hitButton.setEnabled(false);
@@ -139,47 +197,67 @@ public class BlackJackPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				hit();
 				printHands();
-				if(hasPlayerBusted()) {
+				if(hasPlayerBusted() && player2Turn) {
+					player2Turn = false;
+					printHands();
+					playerOptionsPanel.setLocation(411, 539);
+				} else if(hasPlayerBusted()) {
+					playerTurn = false;
+					printHands();
 					checkWinner();
 				}
 			}
 		});
 		
-		JButton standButton = new JButton("Stand");
+		standButton = new JButton("Stand");
 		standButton.setBounds(127, 11, 95, 72);
 		playerOptionsPanel.add(standButton);
 		standButton.setEnabled(false);
 		standButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stand();
-				hitButton.setEnabled(false);
-				standButton.setEnabled(false);
 			}
 		});
 		
-		JButton doubleDownButton = new JButton("Double Down");
+		doubleDownButton = new JButton("<html><center>" + "Double" + "<br>" + "Down" + "</center></html>");
 		doubleDownButton.setBounds(10, 94, 95, 72);
 		playerOptionsPanel.add(doubleDownButton);
 		doubleDownButton.setEnabled(false);
+		doubleDownButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				doubleDownButton.setEnabled(false);
+				doubleDown();    
+			}
+		});
 		
-		JButton splitButton = new JButton("Split");
+		
+		
+		splitButton = new JButton("Split");
 		splitButton.setBounds(127, 94, 95, 72);
 		playerOptionsPanel.add(splitButton);
 		splitButton.setEnabled(false);
+		splitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				playerOptionsPanel.setLocation(411,365);
+				deckPanel.setLocation(506, 180);
+				playerPanel2.setVisible(true);
+				split();
+			}
+		});
 		
 		bettingPanel = new JPanel();
-		bettingPanel.setBounds(1059, 99, 316, 272);
+		bettingPanel.setBounds(1059, 99, 400, 272);
 		add(bettingPanel);
 		bettingPanel.setLayout(null);
 		bettingPanel.setOpaque(false);
 		
 		betAmountLabel = new JLabel("Chips: " + tokens);
-		betAmountLabel.setBounds(10, 11, 168, 37);
+		betAmountLabel.setBounds(10, 11, 250, 37);
 		betAmountLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		bettingPanel.add(betAmountLabel);
 		
-		allInButton = new JRadioButton("All In ($0)");
-		allInButton.setBounds(10, 67, 92, 43);
+		allInButton = new JRadioButton("All In");
+		allInButton.setBounds(10, 67, 110, 43);
 		bettingPanel.add(allInButton);
 		allInButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -188,7 +266,7 @@ public class BlackJackPanel extends JPanel {
 		});
 		
 		minimumButton = new JRadioButton("Minimum (1)");
-		minimumButton.setBounds(10, 113, 92, 43);
+		minimumButton.setBounds(10, 113, 110, 43);
 		bettingPanel.add(minimumButton);
 		minimumButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -197,7 +275,7 @@ public class BlackJackPanel extends JPanel {
 		});
 		
 		customBetButton = new JRadioButton("Custom");
-		customBetButton.setBounds(10, 159, 92, 43);
+		customBetButton.setBounds(10, 159, 110, 43);
 		bettingPanel.add(customBetButton);
 		
 		bettingGroup = new ButtonGroup();
@@ -214,17 +292,17 @@ public class BlackJackPanel extends JPanel {
 				int bet = (int) customBetSpinner.getValue();
 				setBet(bet);
 				deal();
-				printHands();
-				handleResult(checkBlackJack());
 				hitButton.setEnabled(true);
 				standButton.setEnabled(true);
+				doubleDownButton.setEnabled(true);
+				handleResult(checkBlackJack());
 			}
 		});
 		bettingPanel.add(submitBetButton);
 		
 		customBetSpinner = new JSpinner();
 		customBetSpinner.setModel(new SpinnerNumberModel(5, 5, 1000, 1));
-		customBetSpinner.setBounds(108, 159, 80, 43);
+		customBetSpinner.setBounds(130, 159, 80, 43);
 		bettingPanel.add(customBetSpinner);
 		
 		chipPanel = new JPanel();
@@ -241,29 +319,29 @@ public class BlackJackPanel extends JPanel {
 		add(deckPanel);
 		
 		navigationPanel = new JPanel();
-		navigationPanel.setBounds(546, 11, 300, 56);
+		navigationPanel.setBounds(546, 11, 320, 56);
 		add(navigationPanel);
 		navigationPanel.setLayout(null);
 		navigationPanel.setOpaque(false);
 		
 		homeButton = new JButton("Home");
-		homeButton.setBounds(10, 11, 85, 40);
+		homeButton.setBounds(5, 11, 100, 40);
 		homeButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		navigationPanel.add(homeButton);
 		
 		exitButton = new JButton("Exit");
+		exitButton.setBounds(108, 11, 100, 40);
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		exitButton.setBounds(108, 11, 85, 40);
 		navigationPanel.add(exitButton);
 		
 		playAgain = new JButton("Play Again");
 		playAgain.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		playAgain.setBounds(206, 11, 85, 40);
+		playAgain.setBounds(211, 11, 100, 40);
 		navigationPanel.add(playAgain);
 		playAgain.setEnabled(false);
 		playAgain.addActionListener(new ActionListener() {
@@ -280,27 +358,45 @@ public class BlackJackPanel extends JPanel {
 	}
 	
 	public void printHands() {
+		cp.update();
 		displayPlayerHand();
 		displayDealerHand();
+		printDeck();
+		getPlayerTokens();
+	}
+	
+	public void printDeck() {
+		cp.update();
+		deckImg.setIcon(cp.getBack());
 	}
 	
 	public void displayPlayerHand() {
 		for(int i = 0; i < player.getNumOfCards(); i++) {
 			pCards[i].setIcon(cp.getFace(player.getSuitOfCard(i), player.getRankOfCard(i) - 1));
 		}
-		playerValueLabel.setText("Your Hand " + player.getValue());
+		playerValueLabel.setText("Your Hand " + player.getHand());
+		if(isSplit) {
+			for(int i = 0; i < player2.getNumOfCards(); i++) {
+				pCards2[i].setIcon(cp.getFace(player2.getSuitOfCard(i), player2.getRankOfCard(i) - 1));
+			}
+			playerValueLabel2.setText("Your Hand " + player2.getHand());
+		}
 	}
 	
 	public void displayDealerHand() {
-		for(int i = 0; i < dealer.getNumOfCards(); i++) {
-			dCards[i].setIcon(cp.getFace(dealer.getSuitOfCard(i), dealer.getRankOfCard(i) - 1));
+		if(playerTurn == true) {
+			dCards[0].setIcon(cp.getBack());
+			for(int i = 1; i < dealer.getNumOfCards(); i++) {
+				dCards[i].setIcon(cp.getFace(dealer.getSuitOfCard(i), dealer.getRankOfCard(i) - 1));
+			}
+			dealerValueLabel.setText("Dealer: " + (dealer.getValue() - dealer.getCard(0).getValue()));
+		}else {
+			for(int i = 0; i < dealer.getNumOfCards(); i++) {
+				dCards[i].setIcon(cp.getFace(dealer.getSuitOfCard(i), dealer.getRankOfCard(i) - 1));
+			}
+			dealerValueLabel.setText("Dealer: " + dealer.getValue());
 		}
-		dealerValueLabel.setText("Dealer: " + dealer.getValue());
 	}
-	
-	
-	
-	
 	
 	/**
 	 * Under here will be the methods of the game logic
@@ -311,7 +407,7 @@ public class BlackJackPanel extends JPanel {
 		} else if(player.getValue() == 21) {
 			return 1;
 		} else if (dealer.getValue() == 21) {
-			return 0;
+			return 6;
 		} else {
 			return 0;
 		}
@@ -319,11 +415,20 @@ public class BlackJackPanel extends JPanel {
 
 	// Checks for if the player has busted
 	public boolean hasPlayerBusted() {
-		player.aceBuster();
-		if (player.getValue() > 21) {
-			return true;
+		if(player2Turn) {
+			player2.aceBuster();
+			if (player2.getValue() > 21) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
-			return false;
+			player.aceBuster();
+			if (player.getValue() > 21) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -340,6 +445,19 @@ public class BlackJackPanel extends JPanel {
 	// Checks the winner and calls handle result depending on the outcome
 	// Uses the hasPlayerBusted and hasDealerBusted to determine a winner as well as comparing the hand values
 	public void checkWinner() {
+		if(isSplit) {
+			if(player2.getValue() > 21) {
+				handleResult(3);
+			} else if(hasDealerBusted()) {
+				handleResult(2);
+			}else if(dealer.getValue() > player2.getValue()) {
+				handleResult(3);
+			} else if(player2.getValue() > dealer.getValue()) {
+				handleResult(2);
+			} else {
+				handleResult(4);
+			}
+		}
 		if(hasPlayerBusted() == true) {
 			handleResult(3);
 		} else if(hasDealerBusted()) {
@@ -357,18 +475,30 @@ public class BlackJackPanel extends JPanel {
 	public void playAgain() {
 		player.clearHand();
 		dealer.clearHand();
+		if(isSplit) {
+			player2.clearHand();
+			playerPanel2.setVisible(false);
+			deckPanel.setLocation(506, 282);
+		}
 		playerTurn = true;
 		clearHands();
+		isSplit = false;
+		getPlayerTokens();
 	}
 	
 	// The initial deal of the cards to dealer and player
-	//Calls the handleResult function with the value of checkBlackJack
+	// Calls the handleResult function with the value of checkBlackJack
 	public void deal() {
 		deck.shuffle();
 		for(int i = 0; i < 2; i++) {
 			player.addCard(deck.getCard());
 			dealer.addCard(deck.getCard());
 		}
+		printHands();
+		if(player.getCard(0).getValue() == player.getCard(1).getValue()) {
+			splitButton.setEnabled(true);
+		}
+		handleResult(checkBlackJack());
 	}
 	
 	// Determines what the player receives for winning or loses
@@ -383,6 +513,8 @@ public class BlackJackPanel extends JPanel {
 		} else {
 			tokens += bet;
 		}
+		
+		updatePlayerChips();
 	}
 	
 	// This method is a middle method that is mainly responsible for displaying the correct
@@ -400,6 +532,9 @@ public class BlackJackPanel extends JPanel {
 		} else if(result == 4) {
 			getPayout(result);
 			push(); // push
+		} else if(result == 6) {
+			getPayout(3);
+			loser();
 		}
 	}
 	
@@ -407,22 +542,85 @@ public class BlackJackPanel extends JPanel {
 	// Checks for the bust and if true goes through the end of game sequence
 	// Else just prints the new hand
 	public void hit() {
-		player.addCard(deck.getCard());
+		if(player2Turn) {
+			player2.addCard(deck.getCard());
+		} else {
+			player.addCard(deck.getCard());
+		}
 	}
 	
 	// Ends the players turn and calls the dealerTurn function to execute the dealers turn
 	public void stand() {
+		if(player2Turn) {
+			player2Turn = false;
+			playerOptionsPanel.setLocation(411, 539);
+		} else {
+			playerTurn = false;
+			hitButton.setEnabled(false);
+			standButton.setEnabled(false);
+			dealerTurn();
+		}
+	}
+	
+	public void doubleDown() {
+		tokens -= bet;
+		updatePlayerChips();
+		getPlayerTokens();
+		bet = getBet() * 2;
+		player.addCard(deck.getCard());
+		printHands();
 		playerTurn = false;
-		dealerTurn();
+		hitButton.setEnabled(false);
+		standButton.setEnabled(false);
+		if(hasPlayerBusted()) {
+			printHands();
+			checkWinner();
+		} else {
+			dealerTurn();
+		}
+	}
+	
+	public void split() {
+		tokens -= bet;
+		isSplit = true;
+		player2Turn = true;
+		player2.addCard(player.split());
+		pCards[1].setIcon(null);
+		printHands();
 	}
 	
 	// The dealer hits as long as the value of the hand is less than 16 and less than the player
 	// After each hit it reprints the hands
 	// Calls checkWinner after its turn is over
 	public void dealerTurn() {
-		while(dealer.getValue() <= 16 && dealer.getValue() < player.getValue()) {
-			dealer.addCard(deck.getCard());
-			printHands();
+		printHands();
+		if(isSplit) {
+			if(player.getValue() > 21 && player2.getValue() < 22) {
+				while (dealer.getValue() <= 16 && dealer.getValue() < player2.getValue()) {
+					dealer.addCard(deck.getCard());
+					printHands();
+				}
+			} else if(player2.getValue() > 21 && player.getValue() < 22) {
+				while (dealer.getValue() <= 16 && dealer.getValue() < player.getValue()) {
+					dealer.addCard(deck.getCard());
+					printHands();
+				}
+			} else if(player.getValue() > player2.getValue()) {
+				while (dealer.getValue() <= 16 && dealer.getValue() < player.getValue()) {
+					dealer.addCard(deck.getCard());
+					printHands();
+				}
+			} else if(player2.getValue() > player.getValue()) {
+				while (dealer.getValue() <= 16 && dealer.getValue() < player2.getValue()) {
+					dealer.addCard(deck.getCard());
+					printHands();
+				}
+			}
+		} else {
+			while (dealer.getValue() <= 16 && dealer.getValue() <= player.getValue()) {
+				dealer.addCard(deck.getCard());
+				printHands();
+			}
 		}
 		checkWinner();
 	}
@@ -432,6 +630,10 @@ public class BlackJackPanel extends JPanel {
 		gameOver = true;
 		JOptionPane.showMessageDialog(null, "You Win!");
 		betAmountLabel.setText("Chips: " + tokens);
+		hitButton.setEnabled(false);
+		standButton.setEnabled(false);
+		doubleDownButton.setEnabled(false);
+		splitButton.setEnabled(false);
 		playAgain.setEnabled(true);
 	}
 	
@@ -440,6 +642,10 @@ public class BlackJackPanel extends JPanel {
 		gameOver = true;
 		JOptionPane.showMessageDialog(null, "You Lose!");
 		betAmountLabel.setText("Chips: " + tokens);
+		hitButton.setEnabled(false);
+		standButton.setEnabled(false);
+		doubleDownButton.setEnabled(false);
+		splitButton.setEnabled(false);
 		playAgain.setEnabled(true);
 	}
 	
@@ -448,20 +654,67 @@ public class BlackJackPanel extends JPanel {
 		gameOver = true;
 		JOptionPane.showMessageDialog(null, "Push, chips back");
 		betAmountLabel.setText("Chips: " + tokens);
+		hitButton.setEnabled(false);
+		standButton.setEnabled(false);
+		doubleDownButton.setEnabled(false);
+		splitButton.setEnabled(false);
 		playAgain.setEnabled(true);
 	}
 	
 	public void setBet(int newBet) {
 		bet = newBet;
 		tokens -= bet;
+		updatePlayerChips();
+	}
+	
+	public int getBet() {
+		return bet;
 	}
 	
 	public void clearHands() {
 		for(int i = 0; i < 11; i++) {
 			pCards[i].setIcon(null);
 			dCards[i].setIcon(null);
+			if(isSplit) {
+				pCards2[i].setIcon(null);
+			}
 		}
-		playerValueLabel.setText("Your Hand " + player.getValue());
+		playerValueLabel.setText("Your Hand: " + player.getHand());
 		dealerValueLabel.setText("Dealer: " + dealer.getValue());
+		if(isSplit) {
+			playerValueLabel2.setText("Your Hand " + player.getValue());
+		}
+	}
+	
+	/**
+	 * Updates the playerChips.txt that the shop manager 
+	 * needs to allow purchases
+	 */
+	public void updatePlayerChips() {
+		FileWriter writer;
+		try {
+			writer = new FileWriter("playerChips.txt");
+			writer.write(Integer.toString(tokens));
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Updates tokens and the betAmountLabel based 
+	 * on the value in playerChips.txt
+	 */
+	public void getPlayerTokens() {
+		try {
+			Scanner fileScanner = new Scanner(new File ("playerChips.txt"));
+			tokens = fileScanner.nextInt();
+			fileScanner.close();
+			betAmountLabel.setText("Chips: " + tokens);
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: Missing Player Chips file");
+			e.printStackTrace();
+		}
 	}
 }

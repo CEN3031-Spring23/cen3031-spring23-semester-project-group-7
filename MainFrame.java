@@ -1,3 +1,9 @@
+/**
+ * A MainFrame is a subclass of the JFrame class.
+ * The MainFrame is responsible for containing each of the panels
+ * for the overall Blackjack game.
+ */
+
 import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;

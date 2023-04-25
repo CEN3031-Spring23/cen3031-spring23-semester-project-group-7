@@ -50,6 +50,30 @@ public class Player {
 		}
 	}
 	
+	public Card split() {
+		Card temp = new Card();
+		temp = hand[1];
+		hand[1] = null;
+		numOfCards = 1;
+		recalculateHand();
+		return temp;
+  }
+
+	public String getHand() {
+		String handValue = "";
+		int tempValue = getValue();
+		
+		handValue += tempValue;
+		for(int i = 0; i < numOfCards; i++) {
+			if(hand[i].getRank() == 1 && hand[i].getValue() != 1) {
+				tempValue -= 10;
+				handValue += "/" + tempValue;
+			}
+				
+		}
+		return handValue;
+	}
+	
 	public int getNumOfCards() {
 		return numOfCards;
 	}
