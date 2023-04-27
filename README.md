@@ -23,6 +23,7 @@
     - All Java files in the repository are needed except tester files (these files are in the "tests" directory)
     - The directory named "imgs"
 3. Once all necessary files and "imgs" directory are located, place them in your "src" directory in your local Java project
+    - All text files will need to be added(copy and paste) to the project folder 
 4. You're done with the installation 
 
 ---
