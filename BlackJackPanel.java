@@ -646,6 +646,10 @@
 		 doubleDownButton.setEnabled(false);
 		 splitButton.setEnabled(false);
 		 playAgain.setEnabled(true);
+		 if (tokens == 0) {
+			JOptionPane.showMessageDialog(null, "No more chips!\nResetting progress to 0", "Bust", JOptionPane.WARNING_MESSAGE); 
+			resetProgress();	 
+		 }
 	 }
 	 
 	 public void push() {
@@ -715,6 +719,25 @@
 			 System.out.println("ERROR: Missing Player Chips file");
 			 e.printStackTrace();
 		 }
+	 }
+	 
+	 public void resetProgress() {
+		 FileWriter writer;
+		 try {
+			 writer = new FileWriter("playerChips.txt");
+			 writer.write(Integer.toString(100));
+			 writer.close();
+		 } catch (IOException e) {
+			 e.printStackTrace();
+		 }
+		 
+		 try {
+			writer = new FileWriter("playerData.txt");
+			writer.write(1 + ",false,false,false,false");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	 }
  }
  
