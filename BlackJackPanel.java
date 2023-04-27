@@ -119,7 +119,7 @@
 
 		 chipsIcon = new JLabel("");
 		 chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
-		 chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips.png")));
+		 getChipsImage();
 		 chipsIcon.setBounds(60, 529, 300, 220);
 		 add(chipsIcon);
 		 
@@ -746,6 +746,18 @@
 			writer2.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	 }
+	 
+	 public void getChipsImage() {
+		if (tokens > 0 && tokens <= 10) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips1.png")));	
+		} else if (tokens > 10 && tokens <= 100) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips2.png")));	
+		} else if (tokens > 100 && tokens <= 500) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips3.png")));	
+		} else if (tokens > 500) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips4.png")));	
 		}
 	 }
  }
