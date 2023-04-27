@@ -730,11 +730,11 @@
 		 } catch (IOException e) {
 			 e.printStackTrace();
 		 }
-		 
+		 FileWriter writer2;
 		 try {
-			writer = new FileWriter("playerData.txt");
-			writer.write(1 + ",false,false,false,false");
-			writer.close();
+			writer2 = new FileWriter("playerData.txt");
+			writer2.write(1 + ",false,false,false,false");
+			writer2.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
