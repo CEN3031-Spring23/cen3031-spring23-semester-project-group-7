@@ -13,8 +13,10 @@
  
  import javax.swing.JRadioButton;
  import javax.swing.SpinnerNumberModel;
+ import javax.swing.SwingConstants;
  import javax.swing.JButton;
  import javax.swing.ButtonGroup;
+ import javax.swing.ImageIcon;
  import javax.swing.JSpinner;
  import java.awt.event.ActionListener;
  import java.io.File;
@@ -55,6 +57,7 @@
 	 private JLabel[] pCards;
 	 private JLabel[] pCards2;
 	 private JLabel[] dCards;
+	 private JLabel chipsIcon;
 	 
 	 
 	 
@@ -113,6 +116,12 @@
 		  */
 		 setBackground(new Color(29, 74, 146));
 		 setLayout(null);
+
+		 chipsIcon = new JLabel("");
+		 chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
+		 chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips.png")));
+		 chipsIcon.setBounds(60, 529, 300, 220);
+		 add(chipsIcon);
 		 
 		 playerPanel = new JPanel();
 		 playerPanel.setBounds(651, 539, 739, 172);
