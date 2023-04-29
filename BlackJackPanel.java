@@ -116,12 +116,6 @@
 		  */
 		 setBackground(new Color(29, 74, 146));
 		 setLayout(null);
-
-		 chipsIcon = new JLabel("");
-		 chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
-		 getChipsImage();
-		 chipsIcon.setBounds(60, 529, 300, 220);
-		 add(chipsIcon);
 		 
 		 playerPanel = new JPanel();
 		 playerPanel.setBounds(651, 539, 739, 172);
@@ -191,7 +185,7 @@
 		 dealerValueLabel = new JLabel("Dealer: " + dealer.getValue());
 		 dealerValueLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		 dealerValueLabel.setBounds(537, 11, 197, 42);
-		 dealerValueLebel.setForeground(Color.GREEN);
+		 dealerValueLabel.setForeground(Color.GREEN);
 		 dealerPanel.add(dealerValueLabel);
 		 
 		 chipsIcon = new JLabel("");
@@ -363,6 +357,7 @@
 		 playAgain.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
 				 playAgain.setEnabled(false);
+				 deck = new Deck();
 				 playAgain();
 				 hitButton.setEnabled(false);
 				 standButton.setEnabled(false);
