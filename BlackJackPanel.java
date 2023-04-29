@@ -172,6 +172,7 @@
 		 
 		 dealerPanel = new JPanel();
 		 dealerPanel.setBounds(10, 99, 739, 172);
+		 setComponentZOrder(dealerPanel, 0);
 		 add(dealerPanel);
 		 dealerPanel.setLayout(null);
 		 dealerPanel.setOpaque(false);
@@ -190,7 +191,13 @@
 		 dealerValueLabel = new JLabel("Dealer: " + dealer.getValue());
 		 dealerValueLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		 dealerValueLabel.setBounds(537, 11, 197, 42);
+		 dealerValueLebel.setForeground(Color.GREEN);
 		 dealerPanel.add(dealerValueLabel);
+		 
+		 chipsIcon = new JLabel("");
+		 getChipsImage();
+		 setComponentZOrder(chipsIcon, 1);
+		 add(chipsIcon);
 		 
 		 playerOptionsPanel = new JPanel();
 		 playerOptionsPanel.setBounds(411, 539, 232, 172);
@@ -751,13 +758,22 @@
 	 
 	 public void getChipsImage() {
 		if (tokens > 0 && tokens <= 10) {
-			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips1.png")));	
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips1.png")));
+			chipsIcon.setBounds(60, 529, 300, 220);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
 		} else if (tokens > 10 && tokens <= 100) {
-			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips2.png")));	
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips2.png")));
+			chipsIcon.setBounds(60, 529, 300, 220);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
 		} else if (tokens > 100 && tokens <= 500) {
-			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips3.png")));	
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips3.png")));
+			chipsIcon.setBounds(60, 335, 300, 400);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
 		} else if (tokens > 500) {
-			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips4.png")));	
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips4.png")));
+			chipsIcon.setBounds(60, 0, 300, 700);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
+			chipsIcon.setVerticalAlignment(SwingConstants.BOTTOM);
 		}
 	 }
  }
