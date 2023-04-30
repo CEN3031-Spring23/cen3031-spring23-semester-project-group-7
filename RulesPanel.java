@@ -1,3 +1,7 @@
+/**
+The RulesPanel displays the rules of Blackjack
+via a GUI once it is selected from the menu panel
+*/
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JButton;
