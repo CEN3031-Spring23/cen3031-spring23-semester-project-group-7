@@ -13,8 +13,10 @@
  
  import javax.swing.JRadioButton;
  import javax.swing.SpinnerNumberModel;
+ import javax.swing.SwingConstants;
  import javax.swing.JButton;
  import javax.swing.ButtonGroup;
+ import javax.swing.ImageIcon;
  import javax.swing.JSpinner;
  import java.awt.event.ActionListener;
  import java.io.File;
@@ -55,6 +57,7 @@
 	 private JLabel[] pCards;
 	 private JLabel[] pCards2;
 	 private JLabel[] dCards;
+	 private JLabel chipsIcon;
 	 
 	 
 	 
@@ -163,6 +166,7 @@
 		 
 		 dealerPanel = new JPanel();
 		 dealerPanel.setBounds(10, 99, 739, 172);
+		 setComponentZOrder(dealerPanel, 0);
 		 add(dealerPanel);
 		 dealerPanel.setLayout(null);
 		 dealerPanel.setOpaque(false);
@@ -181,7 +185,13 @@
 		 dealerValueLabel = new JLabel("Dealer: " + dealer.getValue());
 		 dealerValueLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		 dealerValueLabel.setBounds(537, 11, 197, 42);
+		 dealerValueLabel.setForeground(Color.GREEN);
 		 dealerPanel.add(dealerValueLabel);
+		 
+		 chipsIcon = new JLabel("");
+		 getChipsImage();
+		 setComponentZOrder(chipsIcon, 1);
+		 add(chipsIcon);
 		 
 		 playerOptionsPanel = new JPanel();
 		 playerOptionsPanel.setBounds(411, 539, 232, 172);
@@ -347,6 +357,7 @@
 		 playAgain.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
 				 playAgain.setEnabled(false);
+				 deck = new Deck();
 				 playAgain();
 				 hitButton.setEnabled(false);
 				 standButton.setEnabled(false);
@@ -646,6 +657,10 @@
 		 doubleDownButton.setEnabled(false);
 		 splitButton.setEnabled(false);
 		 playAgain.setEnabled(true);
+		 if (tokens == 0) {
+			JOptionPane.showMessageDialog(null, "No more chips!\nResetting progress to 0", "Bust", JOptionPane.WARNING_MESSAGE); 
+			resetProgress();	 
+		 }
 	 }
 	 
 	 public void push() {
@@ -715,6 +730,46 @@
 			 System.out.println("ERROR: Missing Player Chips file");
 			 e.printStackTrace();
 		 }
+	 }
+	 
+	 public void resetProgress() {
+		 FileWriter writer;
+		 try {
+			 writer = new FileWriter("playerChips.txt");
+			 writer.write(Integer.toString(100));
+			 writer.close();
+		 } catch (IOException e) {
+			 e.printStackTrace();
+		 }
+		 FileWriter writer2;
+		 try {
+			writer2 = new FileWriter("playerData.txt");
+			writer2.write(1 + ",false,false,false,false");
+			writer2.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	 }
+	 
+	 public void getChipsImage() {
+		if (tokens > 0 && tokens <= 10) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips1.png")));
+			chipsIcon.setBounds(60, 529, 300, 220);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
+		} else if (tokens > 10 && tokens <= 100) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips2.png")));
+			chipsIcon.setBounds(60, 529, 300, 220);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
+		} else if (tokens > 100 && tokens <= 500) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips3.png")));
+			chipsIcon.setBounds(60, 335, 300, 400);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
+		} else if (tokens > 500) {
+			chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chips4.png")));
+			chipsIcon.setBounds(60, 0, 300, 700);
+			chipsIcon.setHorizontalAlignment(SwingConstants.LEFT);
+			chipsIcon.setVerticalAlignment(SwingConstants.BOTTOM);
+		}
 	 }
  }
  
