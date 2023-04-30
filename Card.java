@@ -1,3 +1,8 @@
+/** 
+The Card class designates what values are
+assigned to each cards suit, rank, and value
+so that they can be easily assigned
+*/
 
 public class Card {
     private int suit;
