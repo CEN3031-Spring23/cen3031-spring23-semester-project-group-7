@@ -1,3 +1,8 @@
+/**
+The Deck class will create and handle the 
+deck for both the user and the dealer
+using arrays and designated card values
+*/
 import java.util.ArrayList;
 import java.util.Collections;
 
