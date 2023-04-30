@@ -1,3 +1,8 @@
+/**
+The MenuPanel creates the GUI for the menu,which is 
+the first thing opened upon running the program.
+The user can choose to open the other game panels via this panel.
+*/
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
