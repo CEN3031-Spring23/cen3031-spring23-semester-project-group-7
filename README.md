@@ -22,7 +22,9 @@
 2. Locate necessary files and directory
     - All Java files in the repository are needed except tester files (these files are in the "tests" directory)
     - The directory named "imgs"
+    - The playerData.txt and playerChips.txt text files
 3. Once all necessary files and "imgs" directory are located, place them in your "src" directory in your local Java project
+    - The two text files (playerData.txt and playerChips.txt) will need to be added to the project directory, not the "src" directory
 4. You're done with the installation 
 
 ---
@@ -38,7 +40,8 @@ In order to execute the Blackjack GUI, please run "MainFrame.java"
 2. Once taken to the game screen, you must place your bet
     - Make your selection for how much money you would like to bet
     - Select the "Submit Bet" button to confirm your bet and you will be dealt your first two cards
-3. Once you have received your cards and have looked at the dealer's hand, make your decision by selecting one of the buttons at the bottom of the screen (Hit, Stand, etc.)
+3. Once you have received your cards and have looked at the dealer's hand, make your decision by selecting one of the buttons at the bottom of the screen (Hit, Stand, Double Down, or Split)
+    - Splitting will allow for you to play two hands at once
 4. Continue making your choices until you stand or bust
 5. Once the game is over, select "Play Again" and repeat steps 2-4 to continue playing
 6. If you are done playing, select the "Exit" button to close the application or select "Home" to return to the menu screen
@@ -50,10 +53,12 @@ In order to execute the Blackjack GUI, please run "MainFrame.java"
 
 
 #### **Using The Shop**
-*Note: The shop does not currently allow you to buy or change the style of the deck in game*
 1. Select the "Shop" button on the menu screen
 2. Select desired deck from the list of decks
     - You can switch between the the front and back of the deck by selecting the "Front" or "Back" button
-3. Once done viewing the decks, select "Home" to return to the main menu
+    - The price of each deck will be listed once you click on the button associated with the deck
+3. Given that you have enough chips, you can purchase the deck and select it for the game
+4. Once done viewing the decks, select "Home" to return to the main menu
+5. Even after you close out of the game, your deck purchases will be saved for the next time you open the game
 
 ---
