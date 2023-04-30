@@ -1,3 +1,9 @@
+/**
+The Player class handles the game for the user.
+It will calculate the values neccessary for the
+user's game to work and create their deck
+*/
+
 public class Player {
 	private static final int MAX_VALUE = 11;
 	private int value;
