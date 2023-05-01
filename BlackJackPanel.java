@@ -185,7 +185,6 @@
 		 dealerValueLabel = new JLabel("Dealer: " + dealer.getValue());
 		 dealerValueLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		 dealerValueLabel.setBounds(537, 11, 197, 42);
-		 dealerValueLabel.setForeground(Color.GREEN);
 		 dealerPanel.add(dealerValueLabel);
 		 
 		 chipsIcon = new JLabel("");
@@ -357,7 +356,6 @@
 		 playAgain.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
 				 playAgain.setEnabled(false);
-				 deck = new Deck();
 				 playAgain();
 				 hitButton.setEnabled(false);
 				 standButton.setEnabled(false);
@@ -645,6 +643,7 @@
 		 doubleDownButton.setEnabled(false);
 		 splitButton.setEnabled(false);
 		 playAgain.setEnabled(true);
+		 getChipsImage();
 	 }
 	 
 	 public void loser() {
@@ -661,6 +660,7 @@
 			JOptionPane.showMessageDialog(null, "No more chips!\nResetting progress to 0", "Bust", JOptionPane.WARNING_MESSAGE); 
 			resetProgress();	 
 		 }
+		 getChipsImage();
 	 }
 	 
 	 public void push() {
@@ -713,6 +713,7 @@
 		 } catch (IOException e) {
 			 e.printStackTrace();
 		 }
+		 getChipsImage();
 	 }
 	 
 	 /**
