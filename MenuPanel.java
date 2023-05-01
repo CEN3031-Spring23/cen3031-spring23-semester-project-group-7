@@ -58,7 +58,7 @@ public class MenuPanel extends JPanel {
 		
 		chipsIcon = new JLabel("");
 		chipsIcon.setHorizontalAlignment(SwingConstants.CENTER);
-		chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chipsLogo.png")));
+		chipsIcon.setIcon(new ImageIcon(MenuPanel.class.getResource("/imgs/chipsIcon.png")));
 		chipsIcon.setBounds(6, 6, 612, 443);
 		btnHolder.add(chipsIcon);
 		
